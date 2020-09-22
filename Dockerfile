@@ -1,13 +1,17 @@
-FROM python:3.8.5-alpine
+# Pull base image
+FROM python:3.7
 
+# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# set work dir
 WORKDIR /code
 
-# install dependencies
-RUN pip install --upgrade pip
-COPY ./requirements.txt .
+# install requirements
+COPY requirements.txt /code/
+RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+# copy project
 COPY . /code/
