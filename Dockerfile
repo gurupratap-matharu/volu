@@ -1,12 +1,13 @@
-FROM python:3.7
+FROM python:3.8.5-alpine
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 
-COPY Pipfile Pipfile.lock /code/
-RUN /usr/local/bin/python -m pip install --upgrade pip
-RUN pip install pipenv && pipenv install --system
+# install dependencies
+RUN pip install --upgrade pip
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
 
 COPY . /code/
