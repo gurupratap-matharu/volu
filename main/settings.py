@@ -41,14 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     # 'whitenoise.runserver_nostatic',
-    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # Third-party
+    'allauth',
+    'allauth.account',
 
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
 ]
 
+SITE_ID = 1
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
@@ -82,6 +87,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 AUTH_USER_MODEL = 'users.CustomUser'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -145,8 +155,8 @@ STATICFILES_FINDERS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = 'pages:home'
-ACCOUNT_LOGOUT_REDIRECT = 'pages:home'
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'admin@sitedomain.com'
