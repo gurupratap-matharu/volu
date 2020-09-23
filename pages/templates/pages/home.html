@@ -1,2 +1,11 @@
 {% extends 'pages/_base.html' %}
-<h1>Hi Veer</h1>
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<div class="page-header" style="background-image: url({% static 'pages/img/bg2.jpg' %});">
+    <div class="container">
+        <h1>Home</h1>
+    </div>
+</div>
+{% endblock content %}
