@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include('pages.urls')),
+
     path('dj-admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
+    path('', include('pages.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
