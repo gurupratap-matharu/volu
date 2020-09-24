@@ -99,6 +99,7 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
         </div>
     </nav>
+    {% include '_toast.html' %}
     {% block content %}{% endblock content %}
     <footer class="footer">
         <div class="container">
@@ -115,13 +116,18 @@ The above copyright notice and this permission notice shall be included in all c
                         </a>
                     </li>
                     <li>
+                        <a href="{% url 'feedback' %}">
+                            Feedback
+                        </a>
+                    </li>
+                    <li>
                         <a href="">
                             Blog
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            Licenses
+                        <a href="{% url 'contact' %}">
+                            Contact
                         </a>
                     </li>
                 </ul>
@@ -151,7 +157,7 @@ The above copyright notice and this permission notice shall be included in all c
 
     <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
     <script src="{% static 'pages/js/material-kit.js' %}" type="text/javascript"></script>
-
+    <script>$('.toast').toast('show')</script>
 </body>
 
 </html>
