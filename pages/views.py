@@ -1,10 +1,11 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import FormView, TemplateView
 
-from pages import forms
+from pages.forms import ContactForm, FeedbackForm, SearchForm
 
 
-class HomePageView(TemplateView):
+class HomePageView(FormView):
+    form_class = SearchForm
     template_name = 'pages/home.html'
 
 
@@ -18,7 +19,7 @@ class AboutPageView(TemplateView):
 
 class ContactPageView(SuccessMessageMixin, FormView):
     template_name = 'pages/contact.html'
-    form_class = forms.ContactForm
+    form_class = ContactForm
     success_message = 'Message received successfully!'
     success_url = '/'
 
@@ -29,7 +30,7 @@ class ContactPageView(SuccessMessageMixin, FormView):
 
 class FeedbackPageView(SuccessMessageMixin, FormView):
     template_name = 'pages/feedback.html'
-    form_class = forms.FeedbackForm
+    form_class = FeedbackForm
     success_message = 'Feedback received successfully!'
     success_url = '/'
 
