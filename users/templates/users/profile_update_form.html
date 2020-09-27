@@ -1,0 +1,47 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div class="page-header header-filter" data-parallax="true"
+    style="background-image: url({% static 'pages/img/bg2.jpg' %}); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="card card-login">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="card-header card-header-primary text-center">
+                            <h4 class="card-title">{{ user }}</h4>
+                            <div class="social-line">
+                                <a href="#pablo" class="btn btn-just-icon btn-link">
+                                    <i class="fa fa-facebook-square"></i>
+                                </a>
+                                <a href="#pablo" class="btn btn-just-icon btn-link">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="#pablo" class="btn btn-just-icon btn-link">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <p class="description text-center">Or Be Classical</p>
+                        <div class="card-body ml-2">
+                            {{ form|crispy }}
+                        </div>
+                        <div class="text-center mb-3">
+                            <button type="submit" class="btn btn-primary text-white">Save</button>
+                        </div>
+
+                        <p class="description text-center">Dont' have an account? <a
+                                href="{% url 'account_signup' %}">Sign
+                                up here</a></p>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
