@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 from django_countries.fields import CountryField
 
 
@@ -19,13 +20,16 @@ class Profile(models.Model):
     country = CountryField(blank_label='(select country)')
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='profile')
 
+    def get_absolute_url(self):
+        return reverse('profile_detail', args=[str(self.id)])
 
-@receiver(post_save, sender=get_user_model())
+
+@ receiver(post_save, sender=get_user_model())
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
 
-@receiver(post_save, sender=get_user_model())
+@ receiver(post_save, sender=get_user_model())
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
