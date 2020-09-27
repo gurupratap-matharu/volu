@@ -1,17 +1,22 @@
-<!-- Start Alert -->
-{% if messages %}
-{% for message in messages %}
-<div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <div class="alert-icon">
-        <i class="icon-check"></i>
-    </div>
-    <div class="alert-message">
-        <span>{{ message }}</span>
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 1px;">
+    <!-- Position it -->
+    <div style="position: absolute; top: 80px; right: 20px; min-width: 300px;">
+        <!-- Start Alert -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="alert-icon">
+                <i class="icon-check"></i>
+            </div>
+            <div class="alert-message">
+                <span>{{ message }}</span>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
     </div>
 </div>
-{% endfor %}
-{% endif %}
 <!-- End Alert -->
