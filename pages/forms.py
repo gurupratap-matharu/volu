@@ -3,8 +3,14 @@ import logging
 from django import forms
 from django.conf import settings
 from django.core.mail import send_mail
+from django_countries.fields import CountryField
+from django_countries.widgets import CountrySelectWidget
 
 logger = logging.getLogger(__name__)
+
+
+class SearchForm(forms.Form):
+    country = CountryField().formfield(widget=CountrySelectWidget())
 
 
 class ContactForm(forms.Form):
