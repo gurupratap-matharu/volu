@@ -6,10 +6,16 @@
     <div class="container">
         <form action="" method="POST">
             {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-primary btn-link text-white" type="submit">
-                <i class="material-icons" style="font-size: 36px">search</i>
-            </button>
+            <div class="input-group">
+                {{ form|crispy }}
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <button class="btn btn-primary btn-link text-white" type="submit">
+                            <i class="material-icons" style="font-size: 36px">search</i>
+                        </button>
+                    </span>
+                </div>
+            </div>
         </form>
     </div>
 </div>
