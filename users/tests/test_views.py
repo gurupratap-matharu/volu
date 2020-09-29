@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.urls import resolve, reverse
+from django.urls import resolve
 from users.factories import user_factory
 from users.views import ProfileDetailView, ProfileUpdate
 
@@ -13,10 +13,10 @@ class ProfileDetailTests(TestCase):
         self.assertEqual(view.func.__name__, ProfileDetailView.as_view().__name__)
 
     def test_profile_detail_redirects_for_anonymous_user(self):
-        response = self.client.get(self.user.profile.get_absolute_url)
+        response = self.client.get(self.user.profile.get_absolute_url())
         no_response = self.client.get('/profile/')
 
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
         self.assertTemplateNotUsed(response, 'users/profile_detail.html')
         self.assertEqual(no_response.status_code, 404)
 
@@ -43,13 +43,36 @@ class ProfileUpdateTests(TestCase):
         self.assertEqual(view.func.__name__, ProfileUpdate.as_view().__name__)
 
     def test_profile_update_redirects_for_anonymous_user(self):
-        pass
+        response = self.client.get(self.user.profile.get_update_url())
+        no_response = self.client.get('/profile/update/')
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateNotUsed(response, 'users/profile_update_form.html')
+        self.assertEqual(no_response.status_code, 404)
 
     def test_profile_update_works_for_logged_in_user(self):
-        pass
+        self.client.force_login(self.user)
+
+        response = self.client.get(self.user.profile.get_update_url())
+        no_response = self.client.get('/profile/update/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'users/profile_update_form.html')
+        self.assertContains(response, 'Update')
+        self.assertContains(response, self.user.profile.bio)
+        self.assertNotContains(response, 'Hi I should not be on this page!')
+        self.assertEqual(no_response.status_code, 404)
 
     def test_profile_update_with_valid_data_on_post_works(self):
-        pass
+        self.client.force_login(self.user)
+        data = {'country': 'US', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
+
+        response = self.client.post(self.user.profile.get_update_url(), data=data)
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed(response, 'users/profile_detail.html')
+        self.assertEqual(self.user.profile.bio, 'Backpacking across the globe')
+        self.assertEqual(self.user.profile.country.code, 'US')
+        self.assertEqual(self.user.profile.birth_date, '1985-07-03')
 
     def test_a_user_can_update_only_its_own_profile(self):
         pass
