@@ -30,7 +30,7 @@ class Place(models.Model):
         ordering = ['-updated_on']
 
     def __str__(self):
-        return ", ".join([self.name, self.country])
+        return ", ".join([self.name, self.country.name])
 
     def get_absolute_url(self):
         return reverse('place_detail', args=[str(self.id)])
