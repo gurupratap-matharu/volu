@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = Profile
-    template_name = 'users/profile.html'
+    template_name = 'users/profile_detail.html'
     context_object_name = 'profile'
 
 

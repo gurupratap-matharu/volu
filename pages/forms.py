@@ -11,7 +11,8 @@ logger = logging.getLogger(__name__)
 
 class SearchForm(forms.Form):
     country = CountryField().formfield(widget=CountrySelectWidget(),
-                                       layout='{widget}<img class="country-select-flag" id="{flag_id}" style="margin: 6px 4px 0" src="{country.flag}">')
+                                       layout='{widget}<img class="country-select-flag" id="{flag_id}" style="margin: 6px 4px 0" src="{country.flag}">'
+                                       )
 
 
 class ContactForm(forms.Form):
