@@ -24,3 +24,12 @@ def user_factory():
 
     user.save()
     return user
+
+
+def superuser_factory():
+    superuser = get_user_model().objects.create_superuser(
+        username='superuser',
+        email='superuser@email.com',
+        password='superpass123'
+    )
+    return superuser

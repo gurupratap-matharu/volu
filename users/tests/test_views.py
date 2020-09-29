@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import resolve
-from users.factories import user_factory
+from users.factories import superuser_factory, user_factory
 from users.views import ProfileDetailView, ProfileUpdate
 
 
@@ -36,7 +36,9 @@ class ProfileDetailTests(TestCase):
 
 class ProfileUpdateTests(TestCase):
     def setUp(self):
+        self.superuser = superuser_factory()
         self.user = user_factory()
+        self.bad_user = user_factory()
 
     def test_profile_update_resolves_profileupdateview(self):
         view = resolve(self.user.profile.get_update_url())
@@ -65,17 +67,23 @@ class ProfileUpdateTests(TestCase):
 
     def test_profile_update_with_valid_data_on_post_works(self):
         self.client.force_login(self.user)
-        data = {'country': 'US', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
+        data = {'country': 'Argentina', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
 
         response = self.client.post(self.user.profile.get_update_url(), data=data)
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed(response, 'users/profile_detail.html')
         self.assertEqual(self.user.profile.bio, 'Backpacking across the globe')
-        self.assertEqual(self.user.profile.country.code, 'US')
+        self.assertEqual(self.user.profile.country.code, 'AR')
         self.assertEqual(self.user.profile.birth_date, '1985-07-03')
 
-    def test_a_user_can_update_only_its_own_profile(self):
-        pass
+    def test_a_user_cannot_update_another_users_profile(self):
+        self.client.force_login(self.bad_user)
+        data = {'country': 'Argentina', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
 
-    def test_super_user_can_update_any_profile(self):
-        pass
+        response = self.client.post(self.user.profile.get_update_url(), data=data)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed(response, 'users/profile_detail.html')
+        self.assertEqual(self.user.profile.bio, 'Backpacking across the globe')
+        self.assertEqual(self.user.profile.country.code, 'AR')
+        self.assertEqual(self.user.profile.birth_date, '1985-07-03')
