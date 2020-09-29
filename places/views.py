@@ -6,6 +6,7 @@ from places.models import Place
 class PlaceListView(ListView):
     model = Place
     context_object_name = 'place_list'
+    paginate_by = 6
     template_name = 'places/place_list.html'
 
 

@@ -15,5 +15,5 @@ class PlaceFactory(factory.django.DjangoModelFactory):
     address2 = factory.Faker('address')
     city = factory.Faker('city')
     zip_code = factory.Faker('zipcode')
-    country = 'US'
+    country = factory.Faker('country_code')
     host = factory.SubFactory(AbstractUserFactory)

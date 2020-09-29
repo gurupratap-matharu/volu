@@ -1,1 +1,36 @@
-<h1>Place list</h1>
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Places{% endblock title %}
+
+{% block content %}
+<div class="page-header header-filter" style="background-image: url({% static 'pages/img/bg.jpg' %});">
+    <div class="container">
+        <div class="row">
+            {% for place in place_list %}
+            <div class="col-12 col-md-6 col-lg-3 mb-3">
+                <div class="card h-100">
+                    <a href="{{ place.get_absolute_url }}">
+                        <img class="card-img-top" src="https://picsum.photos/500" rel="nofollow" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <div>
+                            <h4 class="card-text">{{ place.name|title }}</h4>
+                            {{ place.country.name }}
+                            <i class="{{ place.country.flag_css }}"></i>
+                            <p class="card-text">{{ place.description }}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small>{{ place.host }}</small>
+                        <small>{{ place.date_updated|date:"M d" }}</small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
