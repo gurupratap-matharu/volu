@@ -1,3 +1,7 @@
+
+# Macos
+.DS_Store
+
 # Django #
 
 *.log
