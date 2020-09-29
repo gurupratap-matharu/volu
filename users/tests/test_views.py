@@ -70,8 +70,11 @@ class ProfileUpdateTests(TestCase):
         data = {'country': 'Argentina', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
 
         response = self.client.post(self.user.profile.get_update_url(), data=data)
-        self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(response, 'users/profile_detail.html')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'users/profile_update_form.html')
+
+        self.user.profile.refresh_from_db()
+
         self.assertEqual(self.user.profile.bio, 'Backpacking across the globe')
         self.assertEqual(self.user.profile.country.code, 'AR')
         self.assertEqual(self.user.profile.birth_date, '1985-07-03')
@@ -82,8 +85,5 @@ class ProfileUpdateTests(TestCase):
 
         response = self.client.post(self.user.profile.get_update_url(), data=data)
 
-        self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(response, 'users/profile_detail.html')
-        self.assertEqual(self.user.profile.bio, 'Backpacking across the globe')
-        self.assertEqual(self.user.profile.country.code, 'AR')
-        self.assertEqual(self.user.profile.birth_date, '1985-07-03')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateNotUsed(response, 'users/profile_detail.html')

@@ -3,9 +3,17 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-<div class="page-header bg-warning">
-    <div class="container">
-        <h1>About</h1>
-    </div>
+<video playsinline autoplay muted loop poster="stars.jpg" id="bgvid">
+    <source src="{% static 'pages/vid/stars.mp4' %}" type="video/mp4">
+</video>
+<div class="viewport-header">
+    <h1 class="text-white">Explore
+        <span>Montana</span>
+    </h1>
 </div>
+<main>
+    <p>
+
+    </p>
+</main>
 {% endblock content %}
