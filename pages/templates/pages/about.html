@@ -3,7 +3,7 @@
 {% block title %}{% endblock title %}
 
 {% block content %}
-<video playsinline autoplay muted loop poster="stars.jpg" id="bgvid">
+<video playsinline autoplay muted loop poster="{% static 'pages/img/bg3.jpg' %}" id="bgvid">
     <source src="{% static 'pages/vid/stars.mp4' %}" type="video/mp4">
 </video>
 <div class="viewport-header">
