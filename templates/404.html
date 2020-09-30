@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Not Found{% endblock title %}
+
+{% block content %}
+<div class="page-header header-filter" data-parallax="true"
+    style="background-image: url({% static 'pages/img/bg7.jpg' %}); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="card card-login" style="height: 300px;">
+                    <div class="card-header card-header-primary text-center">
+                        <h4 class="card-title">Lost!</h4>
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-center mx-5">
+                        We can't find what you are looking for.
+                    </div>
+                    <p class="description text-center mb-3"><a href="{% url 'home' %}" class="btn btn-primary">Go back
+                            home</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
