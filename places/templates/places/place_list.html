@@ -17,15 +17,20 @@
                     </a>
                     <div class="card-body">
                         <div>
-                            <h4 class="card-text">{{ place.name|title }}</h4>
-                            {{ place.country.name }}
-                            <i class="{{ place.country.flag_css }}"></i>
+                            <a href="{{ place.get_absolute_url }}" class="text-dark">
+                                <h4 class="card-text">{{ place.name|title }}</h4>
+                            </a>
                             <p class="card-text">{{ place.description }}</p>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <small>{{ place.host }}</small>
-                        <small>{{ place.date_updated|date:"M d" }}</small>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div>
+                            {{ place.updated_on|date:"jS M" }}
+                        </div>
+                        <div>
+                            {{ place.country.name }}
+                            <i class="{{ place.country.flag_css }}"></i>
+                        </div>
                     </div>
                 </div>
             </div>
