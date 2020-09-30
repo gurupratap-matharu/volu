@@ -73,6 +73,9 @@ The above copyright notice and this permission notice shall be included in all c
                             <a href="{{ user.profile.get_absolute_url }}" class="dropdown-item">
                                 <i class="material-icons">contacts</i> Profile
                             </a>
+                            <a href="{% url 'place_create' %}" class="dropdown-item">
+                                <i class="material-icons">add_location</i> Host
+                            </a>
                         </div>
                     </li>
                     <li class="nav-item">
