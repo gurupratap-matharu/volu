@@ -1,1 +1,38 @@
-<h1>place detail</h1>
+{% extends '_base.html' %}
+
+{% block title %}{{ place.name|title }}{% endblock title %}
+{% block page %}landing-page sidebar-collapse{% endblock page %}
+{% block content %}
+
+<div class="page-header bg-dark">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 mb-3 ml-auto mr-auto">
+                <div class="card">
+                    <a href="{{ place.get_absolute_url }}">
+                        <img class="card-img-top" src="https://picsum.photos/500" rel="nofollow" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <div>
+                            <a href="{{ place.get_absolute_url }}" class="text-dark">
+                                <h4 class="card-text">{{ place.name|title }}</h4>
+                            </a>
+                            <p class="card-text">{{ place.description }}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <div>
+                            {{ place.updated_on|date:"jS M" }}
+                        </div>
+                        <div>
+                            {{ place.country.name }}
+                            <i class="{{ place.country.flag_css }}"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
