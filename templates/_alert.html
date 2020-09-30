@@ -1,18 +1,18 @@
 <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 1px;">
     <!-- Position it -->
-    <div style="position: absolute; top: 80px; right: 20px; min-width: 300px;">
+    <div style="position: absolute; top: 80px; min-width: 100vw;">
         <!-- Start Alert -->
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="alert-icon">
-                <i class="icon-check"></i>
-            </div>
-            <div class="alert-message">
-                <span>{{ message }}</span>
+        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="material-icons">info_outline</i>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                <b>Info:</b> {{ message }}
             </div>
         </div>
         {% endfor %}
