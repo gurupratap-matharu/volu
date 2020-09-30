@@ -9,14 +9,10 @@
         <div class="row mt-5">
             <div class="col-12 col-md-6 mb-3 ml-auto mr-auto">
                 <div class="card">
-                    <a href="{{ place.get_absolute_url }}">
-                        <img class="card-img-top" src="https://picsum.photos/500" rel="nofollow" alt="Card image cap">
-                    </a>
+                    <img class="card-img-top" src="https://picsum.photos/500" rel="nofollow" alt="Card image cap">
                     <div class="card-body">
                         <div>
-                            <a href="{{ place.get_absolute_url }}" class="text-dark">
-                                <h4 class="card-text">{{ place.name|title }}</h4>
-                            </a>
+                            <h4 class="card-text">{{ place.name|title }}</h4>
                             <p class="card-text">{{ place.description }}</p>
                         </div>
                     </div>
