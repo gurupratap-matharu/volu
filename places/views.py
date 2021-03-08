@@ -40,6 +40,7 @@ class PlaceUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Place
     fields = ['name', 'description', 'email', 'address1', 'address2', 'zip_code', 'is_active']
     sucess_message = "%(name)s successfully updated!"
+    template_name = 'places/place_update_form.html'
 
     def get_object(self, queryset=None):
         obj = super().get_object()
