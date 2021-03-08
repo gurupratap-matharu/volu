@@ -1,2 +1,31 @@
-<h1>Place update</h1>
-{{ form }}
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Update{% endblock title %}
+
+{% block content %}
+<div class="main header-filter" data-parallax="true"
+    style="min-height: 100vh; background-image: url({% static 'pages/img/bg7.jpg' %});">
+    <div class="container pt-5 mb-3">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-6 mb-3">
+                <div class="card card-login mt-5">
+                    <div class="card-header card-header-primary text-center">
+                        <h4 class="card-title">Host</h4>
+                    </div>
+                    <div class="card-body p-md-3">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div class="d-flex justify-content-end">
+                                <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary ml-2">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
