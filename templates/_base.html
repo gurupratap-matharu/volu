@@ -11,18 +11,21 @@
     <link rel="manifest" href="{% static 'pages/img/site.webmanifest' %}">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
     <title>
         {% block title %}Volu{% endblock title %}
     </title>
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
     <!-- CSS Files -->
     <link href="{% static 'pages/css/material-kit.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'flags/sprite-hq.css' %}">
     <link href="{% static 'pages/css/base.css' %}" rel="stylesheet" />
+    <link href="{% static 'flags/sprite-hq.css' %}" rel="stylesheet" />
 </head>
 
 <body class="{% block page %}login-page{% endblock page %}">
@@ -30,7 +33,7 @@
         id="sectionsNav">
         <div class="container">
             <div class="navbar-translate">
-                <a class="navbar-brand" href="{% url 'home' %}">
+                <a class="navbar-brand" href="{% url 'pages:home' %}">
                     Volu</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -47,13 +50,13 @@
                             <i class="material-icons">apps</i> Explore
                         </a>
                         <div class="dropdown-menu dropdown-with-icons">
-                            <a href="{% url 'place_list' %}" class="dropdown-item">
+                            <a href="{% url 'places:place_list' %}" class="dropdown-item">
                                 <i class="material-icons">explore</i> Places
                             </a>
                             <a href="{{ user.profile.get_absolute_url }}" class="dropdown-item">
                                 <i class="material-icons">contacts</i> Profile
                             </a>
-                            <a href="{% url 'place_create' %}" class="dropdown-item">
+                            <a href="{% url 'places:place_create' %}" class="dropdown-item">
                                 <i class="material-icons">add_location</i> Host
                             </a>
                         </div>
@@ -104,12 +107,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'about' %}">
+                        <a href="{% url 'pages:about' %}">
                             About Us
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'feedback' %}">
+                        <a href="{% url 'pages:feedback' %}">
                             Feedback
                         </a>
                     </li>
@@ -119,7 +122,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'contact' %}">
+                        <a href="{% url 'pages:contact' %}">
                             Contact
                         </a>
                     </li>
