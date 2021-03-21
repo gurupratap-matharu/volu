@@ -21,10 +21,10 @@ class Profile(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='profile')
 
     def get_absolute_url(self):
-        return reverse('profile_detail', args=[str(self.id)])
+        return reverse('users:profile_detail', args=[str(self.id)])
 
     def get_update_url(self):
-        return reverse('profile_update', args=[str(self.id)])
+        return reverse('users:profile_update', args=[str(self.id)])
 
     def can_update(self, user):
         return user.is_superuser or self.user == user
