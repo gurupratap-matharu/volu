@@ -53,9 +53,10 @@ INSTALLED_APPS = [
     'django_countries',
 
     # Local
-    'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
     'pages.apps.PagesConfig',
     'places.apps.PlacesConfig',
+    'users.apps.UsersConfig',
 ]
 
 # django all-auth
