@@ -14,8 +14,8 @@ class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
 
-    def get_object(self, queryset):
-        post = get_object_or_404(Post, slug=self.kwargs['slug'],
+    def get_object(self, queryset=None):
+        post = get_object_or_404(Post, slug=self.kwargs['post'],
                                  status='published',
                                  publish__year=self.kwargs['year'],
                                  publish__month=self.kwargs['month'],
