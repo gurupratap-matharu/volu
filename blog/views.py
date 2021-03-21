@@ -8,6 +8,7 @@ class PostListView(ListView):
     model = Post
     context_object_name = 'post_list'
     queryset = Post.published.all()
+    paginate_by = 12
 
 
 class PostDetailView(DetailView):
