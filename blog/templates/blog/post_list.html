@@ -1,1 +1,38 @@
-<h1>Post list</h1>
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Blog{% endblock title %}
+
+{% block header %}
+<div class="page-header header-filter" data-parallax="true"
+    style="background-image: url({% static 'pages/img/bg3.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="brand text-center">
+                    <h1>Blogs</h1>
+                    <h3 class="title text-center">A few words</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+
+<div class="main main-raised">
+    <div class="container">
+        <div class="section text-center">
+            <h2 class="title">Posts</h2>
+            {% for post in post_list %}
+            <h1>
+                <a href={{ post.get_absolute_url }}>
+                    {{ post.title }}
+                </a>
+            </h1>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
