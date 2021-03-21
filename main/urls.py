@@ -27,10 +27,10 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     # Local apps
-    path('', include('pages.urls')),
-    path('blog/', include('blog.urls')),
-    path('places/', include('places.urls')),
-    path('profile/', include('users.urls')),
+    path('', include('pages.urls', namespace='pages')),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('places/', include('places.urls', namespace='places')),
+    path('profile/', include('users.urls', namespace='users')),
 
 ]
 
