@@ -1,1 +1,42 @@
-<h1>{{ post.title }}</h1>
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+{% block page-type %}profile-page sidebar-collapse{% endblock page-type %}
+
+{% block header %}
+<div class="page-header header-filter" data-parallax="true"
+    style="background-image: url({% static 'pages/img/city-profile.jpg' %});"></div>
+{% endblock header %}
+
+{% block content %}
+<div class="main">
+    <div class="profile-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto">
+                    <div class="profile">
+                        <div class="avatar">
+                            <img src="{% static 'pages/img/faces/kendall.jpg' %}" alt="Circle Image"
+                                class="img-raised rounded-circle img-fluid">
+                        </div>
+                        <div class="name">
+                            <h2>{{ post.title }}</h2>
+                            <h5 class="text-muted">{{ post.author|title }}</h5>
+                            <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i
+                                    class="fa fa-dribbble"></i></a>
+                            <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter"><i
+                                    class="fa fa-twitter"></i></a>
+                            <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest"><i
+                                    class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container p-md-3">
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
