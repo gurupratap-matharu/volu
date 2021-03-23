@@ -9,9 +9,9 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 
 # install requirements
-COPY requirements.txt /code/
+COPY ./backend/requirements.txt /code/
 RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . /code/
+COPY ./backend/ /code/
