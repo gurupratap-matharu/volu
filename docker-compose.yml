@@ -3,6 +3,7 @@ version: '3.7'
 services:
     web:
         build: .
+        container_name: volu_web
         command: gunicorn main.wsgi -b 0.0.0.0:8000 --log-level DEBUG
         env_file:
             - .env
@@ -16,6 +17,7 @@ services:
 
     db:
         image: postgres:13.2-alpine
+        container_name: volu_db
         environment:
             POSTGRES_PASSWORD: postgres
         volumes:
