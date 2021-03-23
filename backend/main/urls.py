@@ -20,11 +20,17 @@ from django.urls import include, path
 
 urlpatterns = [
 
+    # Django administration
     path('dj-admin/', admin.site.urls),
+
+    # User management
     path('accounts/', include('allauth.urls')),
-    path('profile/', include('users.urls')),
-    path('places/', include('places.urls')),
-    path('', include('pages.urls')),
+
+    # Local apps
+    path('', include('pages.urls', namespace='pages')),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('places/', include('places.urls', namespace='places')),
+    path('profile/', include('users.urls', namespace='users')),
 
 ]
 

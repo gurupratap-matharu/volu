@@ -53,9 +53,10 @@ INSTALLED_APPS = [
     'django_countries',
 
     # Local
-    'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
     'pages.apps.PagesConfig',
     'places.apps.PlacesConfig',
+    'users.apps.UsersConfig',
 ]
 
 # django all-auth
@@ -168,8 +169,8 @@ STATICFILES_FINDERS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = 'home'
-ACCOUNT_LOGOUT_REDIRECT = 'home'
+LOGIN_REDIRECT_URL = 'pages:home'
+ACCOUNT_LOGOUT_REDIRECT = 'pages:home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'admin@sitedomain.com'

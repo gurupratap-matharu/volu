@@ -33,7 +33,7 @@ class Place(models.Model):
         return ", ".join([self.name, self.country.name])
 
     def get_absolute_url(self):
-        return reverse('place_detail', args=[str(self.id)])
+        return reverse('places:place_detail', args=[str(self.id)])
 
     def can_update(self, user):
         return user.is_superuser or self.host == user
