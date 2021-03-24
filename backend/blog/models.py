@@ -38,3 +38,6 @@ class Post(models.Model):
                                                  self.publish.month,
                                                  self.publish.day,
                                                  self.slug])
+
+    def get_share_url(self):
+        return self.get_absolute_url() + 'share/'
