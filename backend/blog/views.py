@@ -34,16 +34,13 @@ class PostShare(SuccessMessageMixin, FormView):
     def form_valid(self, form):
         post = self.get_object()
         post.url = self.request.build_absolute_uri(post.get_absolute_url())
+        self.success_url = post.get_absolute_url()
         form.send_mail(post)
         return super().form_valid(form)
 
     def get_object(self):
-        post = get_object_or_404(Post, slug=self.kwargs['post'],
+        return get_object_or_404(Post, slug=self.kwargs['post'],
                                  status='published',
                                  publish__year=self.kwargs['year'],
                                  publish__month=self.kwargs['month'],
                                  publish__day=self.kwargs['day'])
-        return post
-
-    def get_success_url(self) -> str:
-        return self.get_object().get_absolute_url()
