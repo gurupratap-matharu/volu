@@ -1,7 +1,6 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView
-from django.views.generic.detail import SingleObjectMixin
 
 from .forms import PostShareForm
 from .models import Post
@@ -17,7 +16,6 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
-    extra_context = {'form': PostShareForm()}
 
     def get_object(self, queryset=None):
         post = get_object_or_404(Post, slug=self.kwargs['post'],
@@ -28,8 +26,10 @@ class PostDetailView(DetailView):
         return post
 
 
-class PostShare(SingleObjectMixin, FormView):
+class PostShare(SuccessMessageMixin, FormView):
+    template_name = 'blog/post_share.html'
     form_class = PostShareForm
+    success_message = 'Post shared successfully!'
 
     def form_valid(self, form):
         post = self.get_object()
@@ -37,7 +37,7 @@ class PostShare(SingleObjectMixin, FormView):
         form.send_mail(post)
         return super().form_valid(form)
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         post = get_object_or_404(Post, slug=self.kwargs['post'],
                                  status='published',
                                  publish__year=self.kwargs['year'],

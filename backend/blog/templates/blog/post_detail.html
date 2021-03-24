@@ -34,37 +34,10 @@
             </div>
             <!-- Button trigger modal -->
             <div class="d-flex justify-content-center p-md-5">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Share
-                </button>
+                <a href="{{ post.get_share_url }}" class="btn btn-primary">Share</a>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Share</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ post.get_share_url }}" method="post">
-                {% csrf_token %}
-                <div class="modal-body">
-                    {{ form|crispy }}
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 {% endblock content %}
