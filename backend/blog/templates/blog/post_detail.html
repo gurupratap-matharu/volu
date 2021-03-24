@@ -1,7 +1,9 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}{{ post.title }}{% endblock title %}
+
 {% block page-type %}profile-page sidebar-collapse{% endblock page-type %}
 
 {% block header %}
@@ -51,7 +53,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ post.get_absolute_url }}" method="post">
+            <form action="{{ post.get_share_url }}" method="post">
                 {% csrf_token %}
                 <div class="modal-body">
                     {{ form|crispy }}
