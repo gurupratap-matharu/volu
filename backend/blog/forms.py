@@ -3,6 +3,8 @@ import logging
 from django import forms
 from django.core.mail import send_mail
 
+from .models import Comment
+
 logger = logging.getLogger(__name__)
 
 
@@ -22,3 +24,9 @@ class PostShareForm(forms.Form):
         send_mail(subject=subject, message=message,
                   from_email='admin@site.domain',
                   recipient_list=[self.cleaned_data['to']], fail_silently=False)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
