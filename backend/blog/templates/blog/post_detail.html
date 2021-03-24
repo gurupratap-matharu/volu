@@ -32,9 +32,52 @@
             <div class="container p-md-3">
                 <p>{{ post.body }}</p>
             </div>
-            <!-- Button trigger modal -->
-            <div class="d-flex justify-content-center p-md-5">
-                <a href="{{ post.get_share_url }}" class="btn btn-primary">Share</a>
+            <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                <!--
+                    color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="#comments-1" role="tab" data-toggle="tab">
+                        <i class="material-icons">message</i>
+                        {% with comments.count as total_comments %}
+                        {{ total_comments }} Comment{{ total_comments|pluralize }}
+                        {% endwith %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#favorites-1" role="tab" data-toggle="tab">
+                        <i class="material-icons">favorite_border</i>
+                        Favorites
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ post.get_share_url }}">
+                        <i class="material-icons">ios_share</i>
+                        Share
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content tab-space">
+                <div class="tab-pane active" id="comments-1">
+
+                    {% for comment in comments %}
+                    <div class="info info-horizontal">
+                        <div class="icon icon-rose">
+                            <i class="material-icons">group_work</i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">{{ comment.name }}</h4>
+                            <p>{{ comment.body }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="tab-pane" id="favorites-1">
+                    Efficiently unleash cross-media information without cross-media value. Quickly maximize timely
+                    deliverables for
+                    real-time schemas.
+                    <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                </div>
             </div>
         </div>
     </div>
