@@ -7,9 +7,9 @@ logger = logging.getLogger(__name__)
 
 
 class PostShareForm(forms.Form):
-    name = forms.CharField(max_length=25)
-    email = forms.EmailField()
-    to = forms.EmailField()
+    name = forms.CharField(max_length=25, label='Your name')
+    email = forms.EmailField(label='Your email')
+    to = forms.EmailField(label="Recipient's email")
     comments = forms.CharField(required=False, widget=forms.Textarea)
 
     def send_mail(self, post=None):
