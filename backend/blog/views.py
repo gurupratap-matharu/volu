@@ -2,7 +2,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView
 
-from .forms import PostShareForm
+from .forms import CommentForm, PostShareForm
 from .models import Post
 
 
@@ -24,6 +24,12 @@ class PostDetailView(DetailView):
                                  publish__month=self.kwargs['month'],
                                  publish__day=self.kwargs['day'])
         return post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.object.comments.filter(active=True)
+        context['comment_form'] = CommentForm()
+        return context
 
 
 class PostShare(SuccessMessageMixin, FormView):
