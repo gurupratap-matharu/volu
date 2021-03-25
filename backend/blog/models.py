@@ -42,6 +42,9 @@ class Post(models.Model):
     def get_share_url(self):
         return self.get_absolute_url() + 'share/'
 
+    def get_comment_url(self):
+        return self.get_absolute_url() + 'comment/'
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
@@ -53,7 +56,7 @@ class Comment(models.Model):
     active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
