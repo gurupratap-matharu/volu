@@ -2,6 +2,8 @@ import logging
 
 from django import forms
 from django.core.mail import send_mail
+from django.forms import widgets
+from django.utils.translation import gettext_lazy as _
 
 from .models import Comment
 
@@ -12,7 +14,9 @@ class PostShareForm(forms.Form):
     name = forms.CharField(max_length=25, label='Your name')
     email = forms.EmailField(label='Your email')
     to = forms.EmailField(label="Recipient's email")
-    comments = forms.CharField(required=False, widget=forms.Textarea)
+    comments = forms.CharField(max_length=2000,
+                               required=False, widget=forms.Textarea,
+                               help_text='Write your message here!')
 
     def send_mail(self, post=None):
         logger.info('sending post share email...')
