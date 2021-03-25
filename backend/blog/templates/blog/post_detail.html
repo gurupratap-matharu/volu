@@ -59,17 +59,23 @@
             </ul>
             <div class="tab-content tab-space">
                 <div class="tab-pane active" id="comments-1">
+                    <button class="btn btn-round btn-outline-primary" data-toggle="modal" data-target="#commentModal">
+                        <i class="material-icons mr-2">assignment</i>
+                        Add comment
+                    </button>
 
                     {% for comment in comments %}
                     <div class="info info-horizontal">
                         <div class="icon icon-rose">
-                            <i class="material-icons">group_work</i>
+                            <i class="material-icons">person</i>
                         </div>
-                        <div class="description">
+                        <div class="des">
                             <h4 class="info-title">{{ comment.name }}</h4>
-                            <p>{{ comment.body }}</p>
+                            <p>{{ comment.body|linebreaks }}</p>
                         </div>
                     </div>
+                    {% empty %}
+                    <p>There are no comments yet.</p>
                     {% endfor %}
                 </div>
                 <div class="tab-pane" id="favorites-1">
@@ -83,4 +89,32 @@
     </div>
 </div>
 
+<!-- Comment Modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" role="">
+    <div class="modal-dialog modal-login" role="document">
+        <div class="modal-content">
+            <div class="card card-signup card-plain">
+                <div class="modal-header">
+                    <div class="card-header card-header-primary text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                                class="material-icons">clear</i></button>
+                        <h4 class="card-title">Add comment</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form class="form" method="POST" action="{{ post.get_comment_url }}">
+                        {% csrf_token %}
+                        <div class="card-body">
+                            {{ comment_form|crispy }}
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
