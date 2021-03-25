@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_extensions',
     'django_countries',
+    'taggit',
 
     # Local
     'blog.apps.BlogConfig',
