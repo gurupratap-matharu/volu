@@ -7,8 +7,8 @@ app_name = 'places'
 
 urlpatterns = [
     path('', PlaceListView.as_view(), name='place_list'),
-    path('<uuid:pk>/', PlaceDetailView.as_view(), name='place_detail'),
     path('create/', PlaceCreate.as_view(), name='place_create'),
-    path('<uuid:pk>/update/', PlaceUpdate.as_view(), name='place_update'),
-    path('<uuid:pk>/delete/', PlaceDelete.as_view(), name='place_delete'),
+    path('<int:year>/<int:month>/<int:day>/<slug:place>/', PlaceDetailView.as_view(), name='place_detail'),
+    path('<int:year>/<int:month>/<int:day>/<slug:place>/update/', PlaceUpdate.as_view(), name='place_update'),
+    path('<int:year>/<int:month>/<int:day>/<slug:place>/delete/', PlaceDelete.as_view(), name='place_delete'),
 ]
