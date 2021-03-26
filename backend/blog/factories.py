@@ -1,5 +1,3 @@
-from os import name
-
 import factory
 from django.utils import timezone
 from users.factories import UserFactory
