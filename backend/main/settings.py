@@ -228,6 +228,6 @@ DATABASES['default'].update(db_from_env)
 
 SHELL_PLUS_IMPORTS = [
     'from users.factories import UserFactory, ProfileFactory',
-    'from blog.factories import PostFactory',
+    'from blog.factories import PostFactory, CommentFactory',
     'from places.factories import PlaceFactory',
 ]
