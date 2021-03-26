@@ -12,7 +12,6 @@ class PostFactory(factory.django.DjangoModelFactory):
     author = factory.SubFactory(UserFactory)
     publish = factory.Faker('date_time_this_century', tzinfo=timezone.get_current_timezone())
     status = factory.Faker('random_element', elements=('draft', 'published'))
-    tags = factory.Faker('sentence')
 
     class Meta:
         model = Post

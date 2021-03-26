@@ -16,8 +16,6 @@ class PlaceFactory(factory.django.DjangoModelFactory):
     city = factory.Faker('city')
     zip_code = factory.Faker('zipcode')
     country = factory.Faker('country_code')
-    tags = factory.Faker('sentence')
-
     host = factory.SubFactory(UserFactory)
 
     class Meta:
