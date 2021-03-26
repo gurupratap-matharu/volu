@@ -1,8 +1,10 @@
+from os import name
+
 import factory
 from django.utils import timezone
 from users.factories import UserFactory
 
-from .models import Post
+from .models import Comment, Post
 
 
 class PostFactory(factory.django.DjangoModelFactory):
@@ -15,3 +17,13 @@ class PostFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Post
+
+
+class CommentFactory(factory.django.DjangoModelFactory):
+    name = factory.Faker('name')
+    email = factory.Faker('email')
+    body = factory.Faker('paragraph', nb_sentences=5)
+    post = factory.SubFactory(PostFactory)
+
+    class Meta:
+        model = Comment
