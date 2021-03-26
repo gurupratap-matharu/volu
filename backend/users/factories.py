@@ -22,12 +22,12 @@ class ProfileFactory(factory.django.DjangoModelFactory):
 class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = get_user_model()
-        django_get_or_create = ('username', 'email',)
+        django_get_or_create = ('username',)
 
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    email = factory.Faker('email')
-    username = factory.Faker('user_name')
+    username = factory.LazyAttribute(lambda obj: '%s-%s' % (obj.first_name, obj.last_name))
+    email = factory.LazyAttribute(lambda obj: '%s-%s@email.com' % (obj.first_name.lower(), obj.last_name.lower()))
     profile = factory.RelatedFactory(ProfileFactory, factory_related_name='user')
 
 
