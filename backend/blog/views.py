@@ -11,7 +11,7 @@ from .models import Post
 class PostListView(ListView):
     model = Post
     context_object_name = 'post_list'
-    paginate_by = 12
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = Post.published.all()
