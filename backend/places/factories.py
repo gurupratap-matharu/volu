@@ -1,5 +1,5 @@
 import factory
-from users.factories import AbstractUserFactory
+from users.factories import UserFactory
 
 from places.models import Place
 
@@ -16,7 +16,7 @@ class PlaceFactory(factory.django.DjangoModelFactory):
     city = factory.Faker('city')
     zip_code = factory.Faker('zipcode')
     country = factory.Faker('country_code')
-    host = factory.SubFactory(AbstractUserFactory)
+    host = factory.SubFactory(UserFactory)
 
     class Meta:
         model = Place
