@@ -1,22 +1,38 @@
 import factory
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
 from faker import Faker
+
+from .models import Profile
 
 fake = Faker()
 
 
-class AbstractUserFactory(factory.django.DjangoModelFactory):
+@factory.django.mute_signals(post_save)
+class ProfileFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Profile
+    country = factory.Faker('country_code')
+    bio = factory.Faker('text')
+    birth_date = factory.Faker('date_this_century')
+    user = factory.SubFactory('users.factories.UserFactory', profile=None)
+
+
+@factory.django.mute_signals(post_save)
+class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = get_user_model()
+        django_get_or_create = ('username', 'email',)
 
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
     email = factory.Faker('email')
     username = factory.Faker('user_name')
+    profile = factory.RelatedFactory(ProfileFactory, factory_related_name='user')
 
 
 def user_factory():
-    user = AbstractUserFactory()
+    user = UserFactory()
 
     user.profile.country = fake.country_code()
     user.profile.bio = fake.text()
