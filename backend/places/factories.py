@@ -8,7 +8,7 @@ NAMES = ['Hostel', 'Beautiful House', 'Wineyard', 'Organic Farm', 'Country Cabin
 
 class PlaceFactory(factory.django.DjangoModelFactory):
 
-    name = factory.Faker('random_element', elements=NAMES)
+    name = factory.Faker('city')
     slug = factory.LazyAttribute(lambda obj: factory.Faker('slug', value=obj.name).generate())
     description = factory.Faker('text')
     email = factory.Faker('email')
