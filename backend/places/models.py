@@ -4,11 +4,13 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
+from taggit.managers import TaggableManager
 
 
 class Place(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=250, unique_for_date='created_on')
     description = models.CharField(max_length=200, blank=True)
     email = models.EmailField()
 
@@ -29,11 +31,23 @@ class Place(models.Model):
     class Meta:
         ordering = ['-updated_on']
 
+    objects = models.Manager()
+    tags = TaggableManager()
+
     def __str__(self):
         return ", ".join([self.name, self.country.name])
 
     def get_absolute_url(self):
-        return reverse('places:place_detail', args=[str(self.id)])
+        return reverse('places:place_detail', args=[self.created_on.year,
+                                                    self.created_on.month,
+                                                    self.created_on.day,
+                                                    self.slug])
+
+    def get_share_url(self):
+        return self.get_absolute_url() + 'share/'
+
+    def get_comment_url(self):
+        return self.get_absolute_url() + 'comment/'
 
     def can_update(self, user):
         return user.is_superuser or self.host == user
