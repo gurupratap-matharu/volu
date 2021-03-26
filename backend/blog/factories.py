@@ -1,5 +1,5 @@
 import factory
-from users.factories import UserFactory, user_factory
+from users.factories import UserFactory
 
 from .models import Post
 
