@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 ]
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # django all-auth
 SITE_ID = 1
 ACCOUNT_SESSION_REMEMBER = True
@@ -71,7 +73,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AUTH_USER_MODEL = 'users.CustomUser'
+TAGGIT_CASE_INSENSITIVE = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -103,7 +105,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
-AUTH_USER_MODEL = 'users.CustomUser'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
