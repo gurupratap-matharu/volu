@@ -1,5 +1,7 @@
+{% load places_tags %}
+{% load blog_tags %}
 <footer class="footer">
-    <div class="container bg-danger">
+    <div class="container">
         <nav class="float-left">
             <ul>
                 <li>
@@ -38,3 +40,7 @@
         </div>
     </div>
 </footer>
+<div class="container">
+    Total places: {% total_places %}
+    Total posts: {% total_posts %}
+</div>
