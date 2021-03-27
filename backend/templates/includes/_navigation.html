@@ -1,0 +1,66 @@
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
+    id="sectionsNav">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="{% url 'pages:home' %}">
+                Volu
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="material-icons">apps</i> Explore
+                    </a>
+                    <div class="dropdown-menu dropdown-with-icons">
+                        <a href="{% url 'places:place_list' %}" class="dropdown-item">
+                            <i class="material-icons">explore</i> Places
+                        </a>
+                        <a href="{{ user.profile.get_absolute_url }}" class="dropdown-item">
+                            <i class="material-icons">contacts</i> Profile
+                        </a>
+                        <a href="{% url 'places:place_create' %}" class="dropdown-item">
+                            <i class="material-icons">add_location</i> Host
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'account_logout' %}">
+                        <i class="material-icons">face</i>
+                    </a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'account_login' %}">
+                        <i class="material-icons">face</i>
+                    </a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
+                        data-original-title="Follow us on Twitter" rel="nofollow">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
+                        data-original-title="Like us on Facebook" rel="nofollow">
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
+                        data-original-title="Follow us on Instagram" rel="nofollow">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

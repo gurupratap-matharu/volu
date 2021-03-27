@@ -1,0 +1,40 @@
+<footer class="footer">
+    <div class="container">
+        <nav class="float-left">
+            <ul>
+                <li>
+                    <a href="">
+                        Volunteer
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'pages:about' %}">
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'pages:feedback' %}">
+                        Feedback
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'blog:post_list' %}">
+                        Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'pages:contact' %}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright float-right d-none d-md-inline">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script>, made with <i class="material-icons">favorite</i> by
+            <a href="" target="_blank">volunteers</a> for a better travel.
+        </div>
+    </div>
+</footer>
