@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
+from taggit.models import Tag
 
 from places.models import Place
 
@@ -27,6 +28,19 @@ class PlaceListView(ListView):
     context_object_name = 'place_list'
     paginate_by = 6
     template_name = 'places/place_list.html'
+
+    def get_queryset(self):
+        print('veer inside get_queryset()')
+        print('veer self: ', self)
+        print('veer self.kwargs: ', self.kwargs)
+        print('veer self.request: ', self.request)
+        queryset = Place.objects.all()
+        tag_slug = self.kwargs.get('tag_slug')
+        if tag_slug:
+            tag = get_object_or_404(Tag, slug=tag_slug)
+            self.extra_context = {'tag': tag}
+            queryset = queryset.filter(tags__in=[tag])
+        return queryset
 
 
 class PlaceDetailView(DetailView):
