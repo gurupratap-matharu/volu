@@ -3,8 +3,16 @@ import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 from taggit.managers import TaggableManager
+from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
+
+
+class UUIDTaggedItem(GenericUUIDTaggedItemBase, TaggedItemBase):
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
 
 
 class Place(models.Model):
@@ -29,10 +37,10 @@ class Place(models.Model):
     host = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='places')
 
     class Meta:
-        ordering = ['-updated_on']
+        ordering = ('-updated_on',)
 
     objects = models.Manager()
-    tags = TaggableManager()
+    tags = TaggableManager(through=UUIDTaggedItem)
 
     def __str__(self):
         return ", ".join([self.name, self.country.name])
