@@ -30,10 +30,6 @@ class PlaceListView(ListView):
     template_name = 'places/place_list.html'
 
     def get_queryset(self):
-        print('veer inside get_queryset()')
-        print('veer self: ', self)
-        print('veer self.kwargs: ', self.kwargs)
-        print('veer self.request: ', self.request)
         queryset = Place.objects.all()
         tag_slug = self.kwargs.get('tag_slug')
         if tag_slug:
