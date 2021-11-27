@@ -232,3 +232,5 @@ SHELL_PLUS_IMPORTS = [
     'from blog.factories import PostFactory, CommentFactory',
     'from places.factories import PlaceFactory',
 ]
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
