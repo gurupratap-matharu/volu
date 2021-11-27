@@ -11,7 +11,7 @@ WORKDIR /code
 # install requirements
 COPY ./backend/requirements.txt /code/
 RUN /usr/local/bin/python -m pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # copy project
 COPY ./backend/ /code/
