@@ -13,9 +13,10 @@ up:
 
 down:
 	docker-compose down
-build:
-	docker-compose down
+
+build:down 
 	docker-compose up -d --build
+	docker-compose ps
 
 logs:
 	docker-compose logs -f web
