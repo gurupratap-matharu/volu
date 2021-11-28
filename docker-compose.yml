@@ -10,8 +10,8 @@ services:
             - ./backend:/code
         restart: unless-stopped
         ports:
-            - 8000:8000
-            - 4000:4000
+            - "8000:8000"
+            - "4000:4000"
         depends_on:
             - db
         networks:
@@ -33,8 +33,8 @@ services:
             dockerfile: dev/Dockerfile
         restart: unless-stopped
         ports:
-            - 80:80
-            - 443:443
+            - "80:80"
+            - "443:443"
         volumes:
             - ./nginx/dev/dev.conf:/etc/nginx/nginx.conf:ro
             - ./backend/staticfiles:/usr/src/app/assets
