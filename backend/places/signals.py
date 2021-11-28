@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 @receiver(pre_save, sender=PlaceImage)
 def generate_thumbnail(sender, instance, **kwargs):
-    logger.info("Generating thumbnail for place %d", str(instance))
+    logger.info("Generating thumbnail for place %s", str(instance))
 
     image = Image.open(instance.image)
     image = image.convert("RGB")
