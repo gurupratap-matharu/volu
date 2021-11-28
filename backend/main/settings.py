@@ -195,7 +195,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'main': {
+        'root': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
@@ -233,4 +233,4 @@ SHELL_PLUS_IMPORTS = [
     'from places.factories import PlaceFactory',
 ]
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
