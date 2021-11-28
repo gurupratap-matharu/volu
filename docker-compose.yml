@@ -8,6 +8,7 @@ services:
             - .env
         volumes:
             - ./backend:/code
+        restart: unless-stopped
         ports:
             - 8000:8000
             - 4000:4000
@@ -22,6 +23,7 @@ services:
             POSTGRES_PASSWORD: postgres
         volumes:
             - postgres_data:/var/lib/postgresql/data/
+        restart: unless-stopped
         networks:
             - main
 
@@ -29,8 +31,10 @@ services:
         build:
             context: ./nginx
             dockerfile: dev/Dockerfile
+        restart: unless-stopped
         ports:
-            - "80:80"
+            - 80:80
+            - 443:443
         volumes:
             - ./nginx/dev/dev.conf:/etc/nginx/nginx.conf:ro
             - ./backend/staticfiles:/usr/src/app/assets
