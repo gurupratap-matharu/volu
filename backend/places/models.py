@@ -21,7 +21,6 @@ class Place(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='created_on')
     description = models.TextField()
     email = models.EmailField()
-
     address1 = models.CharField('Address line 1', max_length=200)
     address2 = models.CharField('Address line 2', max_length=200)
     zip_code = models.CharField('ZIP / Postal Code', max_length=12)
