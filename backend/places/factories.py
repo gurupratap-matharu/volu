@@ -1,7 +1,7 @@
 import factory
 from users.factories import UserFactory
 
-from places.models import Place
+from places.models import Place, PlaceImage
 
 NAMES = ['Hostel', 'Beautiful House', 'Wineyard', 'Organic Farm', 'Country Cabin']
 
@@ -22,3 +22,11 @@ class PlaceFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Place
+
+
+class PlaceImageFactory(factory.django.DjangoModelFactory):
+    place = factory.SubFactory(PlaceFactory)
+    image = factory.django.ImageField(color='blue')
+
+    class Meta:
+        model = PlaceImage
