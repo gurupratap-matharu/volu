@@ -3,6 +3,10 @@ from django.contrib import admin
 from places.models import Place, PlaceImage
 
 
+class PlaceImageInline(admin.TabularInline):
+    model = PlaceImage
+
+
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'email', 'city', 'country', 'is_active', 'ratings', 'host',)
@@ -15,7 +19,4 @@ class PlaceAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_on'
     ordering = ('is_active', 'country', 'city',)
 
-
-@admin.register(PlaceImage)
-class PlaceImageAdmin(admin.ModelAdmin):
-    list_display = ('image', 'thumbnail', 'place',)
+    inlines = [PlaceImageInline, ]
