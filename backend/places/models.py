@@ -8,6 +8,8 @@ from django_countries.fields import CountryField
 from taggit.managers import TaggableManager
 from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
 
+from .utils import place_image_path, place_thumbnail_path
+
 
 class UUIDTaggedItem(GenericUUIDTaggedItemBase, TaggedItemBase):
     class Meta:
@@ -61,3 +63,9 @@ class Place(models.Model):
 
     def can_delete(self, user):
         return user.is_superuser or self.host == user
+
+
+class PlaceImage(models.Model):
+    place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to=place_image_path)
+    thumbnail = models.ImageField(upload_to=place_thumbnail_path, null=True)
