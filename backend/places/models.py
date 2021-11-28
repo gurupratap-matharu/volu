@@ -69,3 +69,6 @@ class PlaceImage(models.Model):
     place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=place_image_path)
     thumbnail = models.ImageField(upload_to=place_thumbnail_path, null=True)
+
+    def __str__(self):
+        return ", ".join([self.image.url, str(self.place)])
