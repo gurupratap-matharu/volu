@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from places.models import Place
+from places.models import Place, PlaceImage
 
 
 @admin.register(Place)
@@ -14,3 +14,8 @@ class PlaceAdmin(admin.ModelAdmin):
     raw_id_fields = ('host',)
     date_hierarchy = 'created_on'
     ordering = ('is_active', 'country', 'city',)
+
+
+@admin.register(PlaceImage)
+class PlaceImageAdmin(admin.ModelAdmin):
+    list_display = ('image', 'thumbnail', 'place',)
