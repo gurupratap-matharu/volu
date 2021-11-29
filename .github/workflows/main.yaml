@@ -16,6 +16,7 @@ jobs:
       - name: Add environment variables to .env
         run: |
           echo DEBUG=0 >> .env
+          echo DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} >> .env
           echo DATABASE_ENGINE=django.db.backends.postgresql >> .env
           echo DATABASE_NAME=${{ secrets.DATABASE_NAME }} >> .env
           echo DATABASE_USER=${{ secrets.DATABASE_USER }} >> .env
@@ -56,6 +57,7 @@ jobs:
       - name: Add environment variables to .env
         run: |
           echo DEBUG=0 >> .env
+          echo DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} >> .env
           echo DATABASE_ENGINE=django.db.backends.postgresql >> .env
           echo DATABASE_NAME=${{ secrets.DATABASE_NAME }} >> .env
           echo DATABASE_USER=${{ secrets.DATABASE_USER }} >> .env
