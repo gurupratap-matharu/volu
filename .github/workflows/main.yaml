@@ -83,13 +83,13 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          scp  -o StrictHostKeyChecking=no -r ./.env ./docker-compose.ci.yml root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/code
+          scp  -o StrictHostKeyChecking=no -r ./.env ./docker-compose.yml root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/code
           ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }} << 'ENDSSH'
             cd /code
             source .env
-            docker login ghcr.io -u $NAMESPACE -p $PERSONAL_ACCESS_TOKEN
-            docker pull $WEB_IMAGE
-            docker pull $NGINX_IMAGE
             docker container prune -f
-            docker-compose -f docker-compose.ci.yml up -d
+            docker-compose up -d --build
+            docker-compose exec web python manage.py migrate
+            docker-compose exec web python manage.py collectstatic --no-input
+            docker-compose ps
           ENDSSH
