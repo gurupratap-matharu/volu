@@ -5,6 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404
 from django.views.generic import DetailView, UpdateView
 
+from users.forms import ProfileUpdateForm
 from users.models import Profile
 
 logger = logging.getLogger(__name__)
@@ -18,7 +19,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
 class ProfileUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Profile
-    fields = ['bio', 'birth_date', 'country']
+    form_class = ProfileUpdateForm
     template_name = 'users/profile_update_form.html'
     success_message = 'Profile successfully updated!'
 
