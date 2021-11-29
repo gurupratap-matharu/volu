@@ -33,8 +33,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - static_volume:/code/staticfiles
-      - media_volume:/code/media
+      - static_volume:/usr/src/app/assets
+      - media_volume:/usr/src/app/media
     networks:
       - main
     depends_on:
