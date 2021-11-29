@@ -47,10 +47,7 @@ class Place(models.Model):
         return ", ".join([self.name, self.country.name])
 
     def get_absolute_url(self):
-        return reverse('places:place_detail', args=[self.created_on.year,
-                                                    self.created_on.month,
-                                                    self.created_on.day,
-                                                    self.slug])
+        return reverse('places:place_detail', args=[self.id])
 
     def get_share_url(self):
         return self.get_absolute_url() + 'share/'
