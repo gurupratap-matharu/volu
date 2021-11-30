@@ -162,7 +162,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 USE_SPACES = os.getenv('USE_SPACES') == 'TRUE'
-print('Veer use_spaces: ', USE_SPACES)
 
 if USE_SPACES:
     # settings
