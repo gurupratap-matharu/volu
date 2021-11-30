@@ -74,7 +74,7 @@ class PlaceUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class PlaceDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Place
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('pages:home')
     success_message = "Place deleted successfully!"
 
     def get_object(self, queryset=None):
