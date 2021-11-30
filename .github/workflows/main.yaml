@@ -98,5 +98,4 @@ jobs:
             docker pull $NGINX_IMAGE
             docker container prune -f
             docker-compose -f docker-compose.prod.yml up -d
-            docker-compose -f docker-compose.prod.yml exec web python manage.py migrate
           ENDSSH
