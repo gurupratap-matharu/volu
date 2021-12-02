@@ -1,14 +1,19 @@
+import logging
 import uuid
 
-from django.contrib.auth import get_user_model
-from django.db import models
-from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 from taggit.managers import TaggableManager
 from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
 
+from django.contrib.auth import get_user_model
+from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
+
 from .utils import place_image_path, place_thumbnail_path
+
+logger = logging.getLogger(__name__)
 
 
 class UUIDTaggedItem(GenericUUIDTaggedItemBase, TaggedItemBase):
@@ -35,16 +40,23 @@ class Place(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
-    host = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='places')
+    host = models.ForeignKey(get_user_model(),
+                             on_delete=models.CASCADE,
+                             related_name='places')
 
     class Meta:
-        ordering = ('-updated_on',)
+        ordering = ('-updated_on', )
 
     objects = models.Manager()
     tags = TaggableManager(through=UUIDTaggedItem)
 
     def __str__(self):
         return ", ".join([self.name, self.country.name])
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        logger.info('setting slug for %s to %s' % (self, self.slug))
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('places:place_detail', args=[self.id])
@@ -63,7 +75,9 @@ class Place(models.Model):
 
 
 class PlaceImage(models.Model):
-    place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='images')
+    place = models.ForeignKey('Place',
+                              on_delete=models.CASCADE,
+                              related_name='images')
     image = models.ImageField(upload_to=place_image_path)
     thumbnail = models.ImageField(upload_to=place_thumbnail_path, null=True)
 
