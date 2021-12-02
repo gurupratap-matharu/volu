@@ -1,11 +1,11 @@
 """A utility script to load test data into the db for places app"""
 
-import random
 
 import factory
-from django.core.management.base import BaseCommand
 from places.factories import PlaceFactory, PlaceImageFactory
 from places.models import Place, PlaceImage
+
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
