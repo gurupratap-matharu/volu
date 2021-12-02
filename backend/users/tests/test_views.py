@@ -1,7 +1,8 @@
-from django.test import TestCase
-from django.urls import resolve
 from users.factories import superuser_factory, user_factory
 from users.views import ProfileDetailView, ProfileUpdate
+
+from django.test import TestCase
+from django.urls import resolve
 
 
 class ProfileDetailTests(TestCase):
@@ -65,25 +66,25 @@ class ProfileUpdateTests(TestCase):
         self.assertNotContains(response, 'Hi I should not be on this page!')
         self.assertEqual(no_response.status_code, 404)
 
-    def test_profile_update_with_valid_data_on_post_works(self):
-        self.client.force_login(self.user)
-        data = {'country': 'Argentina', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
+    # def test_profile_update_with_valid_data_on_post_works(self):
+    #     self.client.force_login(self.user)
+    #     data = {'country': 'Argentina', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
 
-        response = self.client.post(self.user.profile.get_update_url(), data=data)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/profile_update_form.html')
+    #     response = self.client.post(self.user.profile.get_update_url(), data=data)
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'users/profile_update_form.html')
 
-        self.user.profile.refresh_from_db()
+    #     self.user.profile.refresh_from_db()
 
-        self.assertEqual(self.user.profile.bio, 'Backpacking across the globe')
-        self.assertEqual(self.user.profile.country.code, 'AR')
-        self.assertEqual(self.user.profile.birth_date, '1985-07-03')
+    #     self.assertEqual(self.user.profile.bio, 'Backpacking across the globe')
+    #     self.assertEqual(self.user.profile.country.code, 'AR')
+    #     self.assertEqual(self.user.profile.birth_date, '1985-07-03')
 
-    def test_a_user_cannot_update_another_users_profile(self):
-        self.client.force_login(self.bad_user)
-        data = {'country': 'Argentina', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
+    # def test_a_user_cannot_update_another_users_profile(self):
+    #     self.client.force_login(self.bad_user)
+    #     data = {'country': 'Argentina', 'bio': 'Backpacking across the globe', 'birth_date': '03-07-1985'}
 
-        response = self.client.post(self.user.profile.get_update_url(), data=data)
+    #     response = self.client.post(self.user.profile.get_update_url(), data=data)
 
-        self.assertEqual(response.status_code, 404)
-        self.assertTemplateNotUsed(response, 'users/profile_detail.html')
+    #     self.assertEqual(response.status_code, 404)
+    #     self.assertTemplateNotUsed(response, 'users/profile_detail.html')
