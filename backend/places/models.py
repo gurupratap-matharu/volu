@@ -59,7 +59,7 @@ class Place(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('places:place_detail', args=[self.id])
+        return reverse('places:place_detail', args=[str(self.id)])
 
     def get_share_url(self):
         return self.get_absolute_url() + 'share/'
