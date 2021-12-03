@@ -1,8 +1,8 @@
 import factory
-from django.core.files.base import ContentFile
+from places.models import Place, PlaceImage
 from users.factories import UserFactory
 
-from places.models import Place, PlaceImage
+from django.core.files.base import ContentFile
 
 NAMES = ['Hostel', 'Beautiful House', 'Wineyard', 'Organic Farm', 'Country Cabin']
 
