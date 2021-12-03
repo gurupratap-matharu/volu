@@ -8,8 +8,6 @@ services:
             - .env
         volumes:
             - ./backend:/code
-            - static_volume:/code/staticfiles
-            - media_volume:/code/media
         restart: unless-stopped
         ports:
             - "8000:8000"
@@ -39,8 +37,8 @@ services:
             - "443:443"
         volumes:
             - ./nginx/dev/dev.conf:/etc/nginx/nginx.conf:ro
-            - static_volume:/usr/src/app/staticfiles
-            - media_volume:/usr/src/app/media
+            - ./backend/staticfiles:/usr/src/app/staticfiles
+            - ./backend/media:/usr/src/app/media
         depends_on:
             - web
         networks:
