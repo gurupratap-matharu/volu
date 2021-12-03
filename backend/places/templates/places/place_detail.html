@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="container text-center">
-                <p>{{ place.description }}</p>
+                <p class="lead">{{ place.description }}</p>
             </div>
             <div class="row">
                 <div class="col-md-6 ml-auto mr-auto">
@@ -65,14 +65,12 @@
             <div class="tab-content tab-space">
                 <div class="tab-pane active text-center gallery" id="studio">
                     <div class="row">
+                        {% for place_image in place.images.all %}
                         <div class="col-md-3 ml-auto">
-                            <img src="../assets/img/examples/studio-1.jpg" class="rounded">
-                            <img src="../assets/img/examples/studio-2.jpg" class="rounded">
+                            <a href="{{ place_image.image.url }}">
+                                <img src="{{ place_image.thumbnail.url }}" class="rounded"></a>
                         </div>
-                        <div class="col-md-3 mr-auto">
-                            <img src="../assets/img/examples/studio-5.jpg" class="rounded">
-                            <img src="../assets/img/examples/studio-4.jpg" class="rounded">
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="tab-pane text-center gallery" id="works">
