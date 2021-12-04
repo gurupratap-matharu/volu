@@ -262,11 +262,12 @@ SHELL_PLUS_IMPORTS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Sentry
+environment = 'prod' if DEBUG else 'dev'
 
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN'),
     integrations=[DjangoIntegration()],
-    environment='prod',
+    environment=environment,
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
     # We recommend adjusting this value in production.
