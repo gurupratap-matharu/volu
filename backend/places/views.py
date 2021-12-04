@@ -19,11 +19,11 @@ logger = logging.getLogger(__name__)
 class PlaceListView(ListView):
     model = Place
     context_object_name = 'place_list'
-    paginate_by = 6
+    paginate_by = 9
     template_name = 'places/place_list.html'
 
     def get_queryset(self):
-        queryset = Place.objects.all()
+        queryset = Place.listed.all()
         tag_slug = self.kwargs.get('tag_slug')
         if tag_slug:
             tag = get_object_or_404(Tag, slug=tag_slug)
