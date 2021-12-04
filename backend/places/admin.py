@@ -11,10 +11,10 @@ class PlaceImageInlineAdmin(admin.TabularInline):
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'email', 'city', 'country', 'is_active', 'ratings', 'host',)
-    list_filter = ('is_active', 'created_on',)
+    list_display = ('name', 'slug', 'email', 'city', 'country', 'is_active', 'published', 'deleted', 'ratings', 'host',)
+    list_filter = ('is_active', 'created_on', 'published', 'deleted')
     search_fields = ('name', 'email',)
-    list_editable = ('is_active',)
+    list_editable = ('is_active', 'published', 'deleted',)
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('ratings',)
     raw_id_fields = ('host',)
