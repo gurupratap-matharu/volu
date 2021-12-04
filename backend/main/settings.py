@@ -226,7 +226,7 @@ LOGIN_REDIRECT_URL = 'pages:home'
 ACCOUNT_LOGOUT_REDIRECT = 'pages:home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'admin@sitedomain.com'
+DEFAULT_FROM_EMAIL = 'support@voluhunt.xyz'
 RECIPIENT_LIST = ['gurupratap.matharu@gmail.com']
 
 if not DEBUG:
