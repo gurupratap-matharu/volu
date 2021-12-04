@@ -1,7 +1,9 @@
-{% extends 'layouts/_base.html' %}
+{% extends 'layouts/_base-fullscreen.html' %}
 {% load i18n %}
 {% load account %}
-{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+
+{% block title %}{% trans "Confirm E-mail Address" %}{% endblock title %}
+
 {% block content %}
 <h1>{% trans "Confirm E-mail Address" %}</h1>
 {% if confirmation %}
@@ -24,4 +26,4 @@
     {% endblocktrans %}
 </p>
 {% endif %}
-{% endblock %}
+{% endblock content %}
