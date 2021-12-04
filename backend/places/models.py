@@ -22,6 +22,11 @@ class UUIDTaggedItem(GenericUUIDTaggedItemBase, TaggedItemBase):
         verbose_name_plural = _("Tags")
 
 
+class ListedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted=False, published=True, is_active=True)
+
+
 class Place(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
@@ -35,6 +40,8 @@ class Place(models.Model):
     country = CountryField(blank_label='(select country)')
 
     is_active = models.BooleanField(default=True)
+    published = models.BooleanField(default=False)
+    deleted = models.BooleanField(default=False)
     ratings = models.PositiveIntegerField(default=0)
 
     created_on = models.DateTimeField(auto_now_add=True)
@@ -48,6 +55,7 @@ class Place(models.Model):
         ordering = ('-updated_on', )
 
     objects = models.Manager()
+    listed = ListedManager()
     tags = TaggableManager(through=UUIDTaggedItem)
 
     def __str__(self):
