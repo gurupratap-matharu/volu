@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 import dj_database_url
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -158,6 +160,26 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG', 'class': 'logging.StreamHandler', 'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['console'], 'level': 'INFO', 'propagate': True,
+        },
+    },
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -240,8 +262,6 @@ SHELL_PLUS_IMPORTS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Sentry
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN'),
