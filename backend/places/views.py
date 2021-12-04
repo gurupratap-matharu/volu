@@ -12,6 +12,9 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView,
 )
+from django.views.generic.edit import FormView
+
+from .forms import EmailPlaceForm
 
 logger = logging.getLogger(__name__)
 
@@ -82,3 +85,13 @@ class PlaceDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(PlaceDelete, self).delete(request, *args, **kwargs)
+
+
+class PlaceShareView(FormView):
+    form_class = EmailPlaceForm
+    template_name = 'places/place_share_form.html'
+    success_url = reverse_lazy('places:place_list')
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)
