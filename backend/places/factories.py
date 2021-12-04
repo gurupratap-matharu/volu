@@ -19,6 +19,9 @@ class PlaceFactory(factory.django.DjangoModelFactory):
     zip_code = factory.Faker('zipcode')
     country = factory.Faker('country_code')
     ratings = factory.Faker('random_int', min=0, max=1000)
+    is_active = factory.Faker('boolean')
+    published = factory.Faker('boolean')
+    deleted = factory.Faker('boolean')
     host = factory.SubFactory(UserFactory)
 
     class Meta:
