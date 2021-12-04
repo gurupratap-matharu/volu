@@ -1,5 +1,6 @@
 from places.views import (
-    PlaceCreate, PlaceDelete, PlaceDetailView, PlaceListView, PlaceUpdate,
+    PlaceCreate, PlaceDelete, PlaceDetailView, PlaceListView, PlaceShareView,
+    PlaceUpdate,
 )
 
 from django.urls import path
@@ -13,4 +14,5 @@ urlpatterns = [
     path('<uuid:pk>/', PlaceDetailView.as_view(), name='place_detail'),
     path('<int:year>/<int:month>/<int:day>/<slug:place>/update/', PlaceUpdate.as_view(), name='place_update'),
     path('<int:year>/<int:month>/<int:day>/<slug:place>/delete/', PlaceDelete.as_view(), name='place_delete'),
+    path('share/', PlaceShareView.as_view(), name='place_share'),
 ]
