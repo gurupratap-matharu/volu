@@ -41,6 +41,9 @@ build:down up ps
 
 buildlogs:build logs
 
+setup_test_data:
+	docker-compose exec web python manage.py setup_test_data
+	
 shellplus:
 	docker-compose exec web python manage.py shell_plus
 
