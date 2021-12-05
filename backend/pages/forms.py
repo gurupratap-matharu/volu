@@ -47,12 +47,18 @@ class FeedbackForm(forms.Form):
     message = forms.CharField(label='Feedback', max_length=400, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5}))
 
     def send_mail(self):
-        logger.info('Sending feedback...')
-        message = 'From: {0}\n{1}\n{2}'.format(
-            self.cleaned_data['name'], self.cleaned_data['email'], self.cleaned_data['message'])
+        subject = 'Volu feedback message from {}'.format(self.cleaned_data['name'])
+        message = 'From: {0}\nEmail: {1}\n\n{2}'.format(
+            self.cleaned_data['name'],
+            self.cleaned_data['email'],
+            self.cleaned_data['message'])
+
+        logger.info('subject: %s', subject)
         logger.info('message: %s', message)
-        send_mail(subject='Feedback message',
+        logger.info('Sending feedback email...')
+
+        send_mail(subject=subject,
                   message=message,
                   from_email=self.cleaned_data['email'],
-                  recipient_list=settings.RECIPIENT_LIST,
+                  recipient_list=[settings.DEFAULT_TO_EMAIL, ],
                   fail_silently=False)
