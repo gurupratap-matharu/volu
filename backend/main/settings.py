@@ -277,3 +277,8 @@ sentry_sdk.init(
     # If you wish to associate users to errors (assuming you are using
     # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True)
+
+# Stripe
+
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
