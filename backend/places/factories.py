@@ -4,7 +4,9 @@ from users.factories import UserFactory
 
 from django.core.files.base import ContentFile
 
-NAMES = ['Hostel', 'Beautiful House', 'Wineyard', 'Organic Farm', 'Country Cabin']
+NAMES = ['Hostel', 'Wineyard', 'Organic Farm', 'Country Cabin', 'Social Project',
+         'NGO', 'Ecological Project', 'Eco Village', 'Permaculture Institutes',
+         'Holistic Centers', 'Family Homes', 'Communities']
 
 
 class PlaceFactory(factory.django.DjangoModelFactory):
