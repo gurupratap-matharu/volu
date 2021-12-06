@@ -79,6 +79,7 @@ jobs:
           echo SENTRY_DSN=${{ secrets.SENTRY_DSN }} >> .env
           echo STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }} >> .env
           echo STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} >> .env
+          echo STRIPE_PRICE_ID=${{ secrets.STRIPE_PRICE_ID }} >> .env
 
       - name: Add the private SSH key to the ssh-agent
         env:
