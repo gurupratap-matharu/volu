@@ -263,8 +263,8 @@ SHELL_PLUS_IMPORTS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Sentry
-environment = 'prod' if DEBUG else 'dev'
-
+environment = 'dev' if DEBUG else 'prod'
+print('Veer environment: ', environment)
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN'),
     integrations=[DjangoIntegration()],
