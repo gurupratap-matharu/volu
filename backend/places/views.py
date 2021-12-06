@@ -1,20 +1,18 @@
 import logging
 
-from places.models import Place
-from taggit.models import Tag
-
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import (
-    CreateView, DeleteView, DetailView, ListView, UpdateView,
-)
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django.views.generic.edit import FormView
 
+from taggit.models import Tag
+
 from .forms import EmailPlaceForm
+from .models import Place
 
 logger = logging.getLogger(__name__)
 
