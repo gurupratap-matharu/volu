@@ -1,15 +1,15 @@
 import logging
 import uuid
 
-from django_countries.fields import CountryField
-from taggit.managers import TaggableManager
-from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
-
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+
+from django_countries.fields import CountryField
+from taggit.managers import TaggableManager
+from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
 
 from .utils import place_image_path, place_thumbnail_path
 
@@ -47,16 +47,14 @@ class Place(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
-    host = models.ForeignKey(get_user_model(),
-                             on_delete=models.CASCADE,
-                             related_name='places')
-
-    class Meta:
-        ordering = ('-updated_on', )
+    host = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='places')
 
     objects = models.Manager()
     listed = ListedManager()
     tags = TaggableManager(through=UUIDTaggedItem)
+
+    class Meta:
+        ordering = ('-updated_on', )
 
     def __str__(self):
         return ", ".join([self.name, self.country.name])
@@ -83,9 +81,7 @@ class Place(models.Model):
 
 
 class PlaceImage(models.Model):
-    place = models.ForeignKey('Place',
-                              on_delete=models.CASCADE,
-                              related_name='images')
+    place = models.ForeignKey('Place', on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to=place_image_path)
     thumbnail = models.ImageField(upload_to=place_thumbnail_path, null=True)
 
