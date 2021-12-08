@@ -2,7 +2,9 @@ import logging
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.sites.models import Site
 from django.http.response import JsonResponse
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
@@ -39,9 +41,14 @@ def create_checkout_session(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         client_reference_id = request.user.id if request.user.is_authenticated else None
 
-        domain_url = 'http://localhost/subscriptions/'
+        domain_url = request.build_absolute_uri(reverse('subscriptions'))
         success_url = domain_url + 'success?session_id={CHECKOUT_SESSION_ID}'
         cancel_url = domain_url + 'cancel/'
+
+        logger.debug("domain url to: %s" % domain_url)
+        logger.debug("success url to: %s" % success_url)
+        logger.debug("cancel url to: %s" % cancel_url)
+
         line_items = [{'price': settings.STRIPE_PRICE_ID, 'quantity': 1}]
         try:
             checkout_session = stripe.checkout.Session.create(
