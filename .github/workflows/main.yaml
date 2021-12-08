@@ -80,6 +80,7 @@ jobs:
           echo STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }} >> .env
           echo STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} >> .env
           echo STRIPE_PRICE_ID=${{ secrets.STRIPE_PRICE_ID }} >> .env
+          echo STRIPE_ENDPOINT_SECRET=${{ secrets.STRIPE_ENDPOINT_SECRET }} >> .env
 
       - name: Add the private SSH key to the ssh-agent
         env:
