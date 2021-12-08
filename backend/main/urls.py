@@ -1,10 +1,9 @@
 from django.conf import settings
-from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
     # Django administration
     path('dj-admin/', admin.site.urls),
 
@@ -20,7 +19,7 @@ urlpatterns = i18n_patterns(
     path('places/', include('places.urls', namespace='places')),
     path('profile/', include('users.urls', namespace='users')),
     path('subscriptions/', include('subscriptions.urls')),
-)
+]
 
 
 if settings.DEBUG:
