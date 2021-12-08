@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'places.apps.PlacesConfig',
     'users.apps.UsersConfig',
+    'subscriptions.apps.SubscriptionsConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
