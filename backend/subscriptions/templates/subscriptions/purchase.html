@@ -30,15 +30,6 @@
     </div>
 </div>
 {% endblock header %}
-
-{% block content %}
-<div class="page-header bg-dark">
-    <div class=" container text-center">
-        <button type="submit" id="submitBtn" class="btn btn-primary btn-lg">Subscribe</button>
-    </div>
-</div>
-{% endblock content %}
-
 {% block js %}
 <script src="https://js.stripe.com/v3/"></script>
 <script src="{% static 'subscriptions/js/main.js' %}"></script>
