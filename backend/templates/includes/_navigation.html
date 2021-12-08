@@ -1,3 +1,4 @@
+{% load i18n %}
 <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
     id="sectionsNav">
     <div class="container">
@@ -30,6 +31,26 @@
                             <i class="material-icons">add_location</i> Host
                         </a>
                     </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true">
+                        <i class="material-icons">language</i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-with-icons">
+                        <li class="dropdown-header">Choose language</li>
+
+                        {% get_current_language as CURRENT_LANGUAGE %}
+                        {% get_available_languages as AVAILABLE_LANGUAGES %}
+                        {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+
+                        {% for language in languages %}
+
+                        <a href="/{{ language.code }}/" class="dropdown-item">
+                            <i class="material-icons">translate</i>{{ language.name_local }}
+                        </a>
+
+                        {% endfor %}
+                    </ul>
                 </li>
                 <li class="nav-item">
                     {% if user.is_authenticated %}
