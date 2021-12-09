@@ -1,0 +1,24 @@
+{% extends 'layouts/_base.html' %}
+{% load static %}
+
+{% block title %}Orders{% endblock title %}
+
+{% block header %}
+<div class="page-header header-filter" style="background-image: url({% static 'pages/img/bg7.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="text-center">
+                    <button type="submit" id="submitBtn" class="btn btn-white btn-lg">Purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock header %}
+
+
+{% block js %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'orders/js/main.js' %}"></script>
+{% endblock js %}
