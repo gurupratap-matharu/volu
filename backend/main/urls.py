@@ -18,6 +18,7 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('places/', include('places.urls', namespace='places')),
     path('profile/', include('users.urls', namespace='users')),
+    path('orders/', include('orders.urls')),
     path('subscriptions/', include('subscriptions.urls')),
 ]
 
