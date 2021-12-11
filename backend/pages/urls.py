@@ -1,7 +1,6 @@
 from django.urls import path
 
-from pages.views import (AboutPageView, ContactPageView, FeedbackPageView,
-                         HomePageView)
+from pages.views import AboutPageView, ContactPageView, FeedbackPageView, HomePageView
 
 app_name = 'pages'
 
