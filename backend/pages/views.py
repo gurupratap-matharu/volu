@@ -4,13 +4,8 @@ from django.views.generic import FormView, TemplateView
 from pages.forms import ContactForm, FeedbackForm, SearchForm
 
 
-class HomePageView(FormView):
-    form_class = SearchForm
+class HomePageView(TemplateView):
     template_name = 'pages/home.html'
-
-
-class LoginPageView(TemplateView):
-    template_name = 'pages/login.html'
 
 
 class AboutPageView(TemplateView):
@@ -18,8 +13,8 @@ class AboutPageView(TemplateView):
 
 
 class ContactPageView(SuccessMessageMixin, FormView):
-    template_name = 'pages/contact.html'
     form_class = ContactForm
+    template_name = 'pages/contact.html'
     success_message = 'Message received successfully!'
     success_url = '/'
 
@@ -29,8 +24,8 @@ class ContactPageView(SuccessMessageMixin, FormView):
 
 
 class FeedbackPageView(SuccessMessageMixin, FormView):
-    template_name = 'pages/feedback.html'
     form_class = FeedbackForm
+    template_name = 'pages/feedback.html'
     success_message = 'Feedback received successfully!'
     success_url = '/'
 
