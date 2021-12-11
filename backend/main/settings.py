@@ -246,6 +246,26 @@ DEFAULT_FROM_EMAIL = 'support@voluhunt.xyz'
 DEFAULT_TO_EMAIL = 'support@voluhunt.xyz'
 RECIPIENT_LIST = ['gurupratap.matharu@gmail.com']
 
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+SHELL_PLUS_IMPORTS = [
+    'from users.factories import UserFactory, ProfileFactory',
+    'from blog.factories import PostFactory, CommentFactory',
+    'from places.factories import PlaceFactory, PlaceImageFactory',
+]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+# Stripe
+
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PRICE_ID = os.getenv('STRIPE_PRICE_ID')
+STRIPE_ENDPOINT_SECRET = os.getenv('STRIPE_ENDPOINT_SECRET')
+
 if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
@@ -267,35 +287,16 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+    # Sentry
+    sentry_sdk.init(
+        dsn=os.getenv('SENTRY_DSN'),
+        integrations=[DjangoIntegration()],
+        environment='production',
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production.
+        traces_sample_rate=1.0,
 
-SHELL_PLUS_IMPORTS = [
-    'from users.factories import UserFactory, ProfileFactory',
-    'from blog.factories import PostFactory, CommentFactory',
-    'from places.factories import PlaceFactory, PlaceImageFactory',
-]
-
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-
-# Sentry
-environment = 'dev' if DEBUG else 'prod'
-sentry_sdk.init(
-    dsn=os.getenv('SENTRY_DSN'),
-    integrations=[DjangoIntegration()],
-    environment=environment,
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
-    traces_sample_rate=1.0,
-
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True)
-
-# Stripe
-
-STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
-STRIPE_PRICE_ID = os.getenv('STRIPE_PRICE_ID')
-STRIPE_ENDPOINT_SECRET = os.getenv('STRIPE_ENDPOINT_SECRET')
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True)
