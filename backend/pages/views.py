@@ -32,3 +32,7 @@ class FeedbackPageView(SuccessMessageMixin, FormView):
     def form_valid(self, form):
         form.send_mail()
         return super().form_valid(form)
+
+
+class SearchPageView(TemplateView):
+    template_name = 'pages/search.html'
