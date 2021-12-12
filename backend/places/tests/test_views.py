@@ -1,8 +1,9 @@
-from places.factories import PlaceFactory, PlaceImageFactory
-from places.views import PlaceDetailView
-
 from django.test import TestCase
 from django.urls import resolve, reverse
+
+from places.factories import PlaceFactory, PlaceImageFactory
+from places.models import Place
+from places.views import PlaceDetailView, SearchResultsView
 
 
 class PlaceListTests(TestCase):
@@ -43,3 +44,19 @@ class PlaceUpdateTests(TestCase):
 
 class PlaceDeleteTests(TestCase):
     pass
+
+
+class PlaceSearchTests(TestCase):
+    def test_place_search_works(self):
+        response = self.client.get(reverse('places:search'))
+        no_response = self.client.get('/place-search/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'places/search_results.html')
+        self.assertContains(response, 'Search')
+        self.assertNotContains(response, 'Hi I should not be on this page.')
+        self.assertEqual(no_response.status_code, 404)
+
+    def test_place_search_resolves_placesearchview(self):
+        view = resolve(reverse('places:search'))
+        self.assertEqual(view.func.__name__, SearchResultsView.as_view().__name__)
