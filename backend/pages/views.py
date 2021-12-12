@@ -1,7 +1,7 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import FormView, TemplateView
 
-from pages.forms import ContactForm, FeedbackForm, SearchForm
+from pages.forms import ContactForm, FeedbackForm
 
 
 class HomePageView(TemplateView):
