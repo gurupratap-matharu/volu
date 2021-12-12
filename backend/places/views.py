@@ -3,6 +3,7 @@ import logging
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -104,5 +105,15 @@ class SearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get("q")
+        search_vector = SearchVector('name', 'description')
+        search_query = SearchQuery(query)
+
         logger.info('Search query: %s' % query)
-        return Place.listed.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+        return (
+            Place.listed.annotate(
+                search=search_vector, rank=SearchRank(search_vector, search_query)
+            )
+            .filter(search=search_query)
+            .order_by('-rank')
+        )
