@@ -1,0 +1,71 @@
+{% extends 'layouts/_base.html' %}
+{% load static %}
+{% block title %}Search{% endblock title %}
+
+
+{% block header %}
+<div class="page-header header-filter" data-parallax="true"
+    style="background-image: url({% static 'pages/img/bg3.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <div class="brand text-center">
+                    <h1>Places</h1>
+                    <h3 class="title text-center">to volunteer</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="main main-raised">
+    <div class="container pt-5 mb-3">
+        <div class="section">
+            <h2 class="title">Places</h2>
+            {% if tag %}
+            <h3>Places tagged with "{{ tag.name }}"</h3>
+            {% endif %}
+            <div class="row mt-5">
+                {% for place in place_list %}
+                <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100">
+                        <a href="{{ place.get_absolute_url }}">
+                            <img class="card-img-top" src="https://picsum.photos/500" rel="nofollow"
+                                alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <div>
+                                <a href="{{ place.get_absolute_url }}" class="text-dark">
+                                    <h4 class="card-title">{{ place.name|title }}</h4>
+                                </a>
+                                {% for tag in place.tags.all %}
+                                <a href="{% url 'places:place_list_by_tag' tag.slug %}">
+                                    {{ tag.name }}
+                                </a>
+                                {% endfor %}
+                                <p class="card-text">{{ place.description|truncatewords:30|linebreaks }}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <div>
+                                {{ place.updated_on|date:"jS M" }}
+                            </div>
+                            <div>
+                                {{ place.country.name }}
+                                <i class="{{ place.country.flag_css }}"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        {% include 'includes/_pagination.html' %}
+    </div>
+
+</div>
+{% endblock content %}
