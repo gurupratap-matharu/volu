@@ -3,6 +3,7 @@ import logging
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q, QuerySet
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -93,3 +94,15 @@ class PlaceShareView(FormView):
     def form_valid(self, form):
         form.send_email()
         return super().form_valid(form)
+
+
+class SearchResultsView(ListView):
+    model = Place
+    template_name = 'places/search_results.html'
+    context_object_name = 'place_list'
+    paginate_by = 9
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        logger.info('Search query: %s' % query)
+        return Place.listed.filter(Q(name__icontains=query) | Q(description__icontains=query))

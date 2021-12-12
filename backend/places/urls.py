@@ -1,9 +1,9 @@
-from places.views import (
-    PlaceCreate, PlaceDelete, PlaceDetailView, PlaceListView, PlaceShareView,
-    PlaceUpdate,
-)
-
 from django.urls import path
+
+from places.views import (
+    PlaceCreate, PlaceDelete, PlaceDetailView, PlaceListView, PlaceShareView, PlaceUpdate,
+    SearchResultsView,
+)
 
 app_name = 'places'
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('<int:year>/<int:month>/<int:day>/<slug:place>/update/', PlaceUpdate.as_view(), name='place_update'),
     path('<int:year>/<int:month>/<int:day>/<slug:place>/delete/', PlaceDelete.as_view(), name='place_delete'),
     path('share/', PlaceShareView.as_view(), name='place_share'),
+    path('search/', SearchResultsView.as_view(), name='search'),
 ]
