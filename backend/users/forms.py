@@ -23,7 +23,7 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ('bio', 'birth_date', 'country',)
         widgets = {
-            'birth_date': forms.DateInput(format=('%m-%d-%Y'), attrs={
-                'class': 'datetimepicker',
-                'type': 'text'}),
+            'bio': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+            'birth_date': forms.DateInput(
+                format=('%m-%d-%Y'), attrs={'class': 'datetimepicker', 'type': 'text'})
         }
