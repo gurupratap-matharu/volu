@@ -2,6 +2,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView
+
 from taggit.models import Tag
 
 from .forms import CommentForm, PostShareForm
@@ -11,7 +12,7 @@ from .models import Post
 class PostListView(ListView):
     model = Post
     context_object_name = 'post_list'
-    paginate_by = 6
+    paginate_by = 12
 
     def get_queryset(self):
         queryset = Post.published.all()
