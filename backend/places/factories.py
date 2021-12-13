@@ -1,8 +1,8 @@
+from django.core.files.base import ContentFile
+
 import factory
 from places.models import Place, PlaceImage
 from users.factories import UserFactory
-
-from django.core.files.base import ContentFile
 
 NAMES = ['Hostel', 'Wineyard', 'Organic Farm', 'Country Cabin', 'Social Project',
          'NGO', 'Ecological Project', 'Eco Village', 'Permaculture Institutes',
@@ -14,7 +14,7 @@ class PlaceFactory(factory.django.DjangoModelFactory):
     name = factory.Faker('city')
     slug = factory.LazyAttribute(lambda obj: factory.Faker('slug', value=obj.name).generate())
     description = factory.Faker('text')
-    email = factory.Faker('email')
+    email = factory.Faker('company_email')
     address1 = factory.Faker('address')
     address2 = factory.Faker('address')
     city = factory.Faker('city')
