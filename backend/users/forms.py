@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
@@ -22,8 +23,7 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ('bio', 'birth_date', 'country',)
         widgets = {
-            'birth_date': forms.DateInput(format=('%m/%d/%Y'), attrs={
-                'class': 'datepicker',
-                'placeholder': 'Select a date',
-                'type': 'date'}),
+            'birth_date': forms.DateInput(format=('%m-%d-%Y'), attrs={
+                'class': 'datetimepicker',
+                'type': 'text'}),
         }
