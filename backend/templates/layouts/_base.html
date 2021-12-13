@@ -28,10 +28,10 @@
 <body class="{% block page-type %}login-page sidebar-collapse{% endblock page-type %}">
   {% include 'includes/_alert.html' %}
 
-  {% block navigation %}{% endblock navigation %}
+  {% block navigation %}{% include 'includes/_navigation.html' %}{% endblock navigation %}
   {% block header %}{% endblock header %}
   {% block content %}{% endblock content %}
-  {% block footer %}{% endblock footer %}
+  {% block footer %}{% include 'includes/_footer.html' %}{% endblock footer %}
   {% include 'includes/_scripts.html' %}
   {% block js %}{% endblock js %}
 </body>
