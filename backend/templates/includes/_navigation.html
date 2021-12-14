@@ -37,34 +37,28 @@
                         <i class="material-icons">search</i>
                     </a>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-
-                    {% if user.is_authenticated %}
                     <a class="nav-link" href="{% url 'account_logout' %}">
-                        <i class="material-icons">face</i>
+                        <i class="material-icons">account_circle</i>
                     </a>
-                    {% else %}
+                </li>
+                {% else %}
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_login' %}">
-                        <i class="material-icons">face</i>
-                    </a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
-                        data-original-title="Follow us on Twitter" rel="nofollow">
-                        <i class="fa fa-twitter"></i>
+                        Sign in
                     </a>
                 </li>
+                <li>/</li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
-                        data-original-title="Like us on Facebook" rel="nofollow">
-                        <i class="fa fa-facebook-square"></i>
+                    <a class="nav-link" href="{% url 'account_signup' %}">
+                        Sign up
                     </a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
-                        data-original-title="Follow us on Instagram" rel="nofollow">
-                        <i class="fa fa-instagram"></i>
+                    <a class="btn btn-white btn-round text-dark" href="{% url 'places:place_create' %}">
+                        Become a Host
                     </a>
                 </li>
             </ul>
