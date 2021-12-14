@@ -1,0 +1,46 @@
+{% extends "layouts/_base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Signup" %}{% endblock title %}
+
+{% block content %}
+
+
+<div class="page-header header-filter" data-parallax="true"
+    style="background-image: url({% static 'pages/img/bg7.jpg' %}); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="card">
+                    <div class="card-header card-header-primary text-center">
+                        <h4 class="card-title">{% trans "Sign Up" %}</h4>
+                    </div>
+                    <div class="card-body ml-2 d-flex flex-column justify-content-between">
+                        {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}
+                        You are about to use your {{provider_name}} account to login to
+                        {{site_name}}.
+                        As a final step, please complete the following form
+                        {% endblocktrans %}
+
+                        <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+                            <div class="text-center mb-3">
+                                <button type="submit" class="btn btn-primary">
+                                    {% trans "Sign Up" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
