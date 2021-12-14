@@ -1,6 +1,9 @@
 {% extends 'layouts/_base.html' %}
+
 {% load static %}
+{% load socialaccount %}
 {% load crispy_forms_tags %}
+
 {% block title %}Log In{% endblock title %}
 
 {% block content %}
@@ -15,7 +18,8 @@
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">Login</h4>
                             <div class="social-line">
-                                <a href="#pablo" class="btn btn-just-icon btn-link">
+                                <a href="{% provider_login_url "facebook" method="oauth2" %}"
+                                    class="btn btn-just-icon btn-link">
                                     <i class="fa fa-facebook-square"></i>
                                 </a>
                                 <a href="#pablo" class="btn btn-just-icon btn-link">
