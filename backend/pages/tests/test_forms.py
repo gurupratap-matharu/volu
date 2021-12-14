@@ -1,5 +1,6 @@
 from django.core import mail
 from django.test import TestCase
+
 from pages.forms import ContactForm, FeedbackForm
 
 
@@ -16,7 +17,7 @@ class TestContactForm(TestCase):
             form.send_mail()
 
         self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].subject, 'Site message')
+        self.assertEqual(mail.outbox[0].subject, 'Volu Contact message from Veer')
         self.assertGreaterEqual(len(cm.output), 1)
 
     def test_invalid_contact_form(self):
@@ -37,7 +38,7 @@ class FeedbackFormTest(TestCase):
             form.send_mail()
 
         self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].subject, 'Feedback message')
+        self.assertEqual(mail.outbox[0].subject, 'Volu feedback message from Veer')
         self.assertGreaterEqual(len(cm.output), 1)
 
     def test_invalid_feedback_form(self):
