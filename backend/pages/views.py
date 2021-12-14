@@ -12,6 +12,14 @@ class AboutPageView(TemplateView):
     template_name = 'pages/about.html'
 
 
+class TermsPageView(TemplateView):
+    template_name = 'pages/terms.html'
+
+
+class PrivacyPageView(TemplateView):
+    template_name = 'pages/privacy.html'
+
+
 class ContactPageView(SuccessMessageMixin, FormView):
     form_class = ContactForm
     template_name = 'pages/contact.html'
