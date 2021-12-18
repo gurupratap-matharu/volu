@@ -1,7 +1,16 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
+
+from blog.sitemaps import PostSitemap
+from places.sitemaps import PlaceSiteMap
+
+sitemaps = {
+    'posts': PostSitemap,
+    'places': PlaceSiteMap,
+}
 
 urlpatterns = [
     # Django administration
@@ -20,6 +29,8 @@ urlpatterns = [
     path('profile/', include('users.urls', namespace='users')),
     path('orders/', include('orders.urls')),
     path('subscriptions/', include('subscriptions.urls')),
+
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 
