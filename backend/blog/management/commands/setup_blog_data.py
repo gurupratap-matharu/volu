@@ -43,9 +43,12 @@ class Command(BaseCommand):
         with factory.Faker.override_default_locale(locale):
 
             posts = PostFactory.create_batch(size=100, author=random.choice(users))
-            comments = CommentFactory.create_batch(size=500, post=random.choice(posts))
 
             for post in posts:
+                # Create comments for each post
+                _ = CommentFactory.create_batch(size=random.randint(1, 50), post=post)
+
+                # Create random tags for each post
                 tags = random.choices(TAGS, k=3)
                 for tag in tags:
                     post.tags.add(tag)
