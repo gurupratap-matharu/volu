@@ -5,6 +5,8 @@ from places.views import (
     SearchResultsView,
 )
 
+from .feeds import LatestPlacesFeed
+
 app_name = 'places'
 
 urlpatterns = [
@@ -16,4 +18,6 @@ urlpatterns = [
     path('<int:year>/<int:month>/<int:day>/<slug:place>/delete/', PlaceDelete.as_view(), name='place_delete'),
     path('share/', PlaceShareView.as_view(), name='place_share'),
     path('search/', SearchResultsView.as_view(), name='search'),
+    path('feed/', LatestPlacesFeed(), name='place_feed')
+
 ]
