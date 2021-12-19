@@ -5,7 +5,24 @@
         <!-- Start Alert -->
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+
+        <!-- Debug Message -->
+        {% if message.tags == 'debug' %}
+        <div class="alert alert-primary">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="material-icons">description</i>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+
+        <!-- Info Message -->
+        {% elif message.tags == 'info' %}
+        <div class="alert alert-info">
             <div class="container">
                 <div class="alert-icon">
                     <i class="material-icons">info_outline</i>
@@ -16,6 +33,49 @@
                 {{ message }}
             </div>
         </div>
+
+        <!-- Success Message -->
+        {% elif message.tags == 'success' %}
+        <div class="alert alert-success">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="material-icons">check</i>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+
+        <!-- Warning Message -->
+        {% elif message.tags == 'warning' %}
+        <div class="alert alert-warning">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="material-icons">warning</i>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        {% elif message.tags == 'error' %}
+        <div class="alert alert-danger">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="material-icons">dangerous</i>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
         {% endif %}
         <!-- End Alert -->
