@@ -6,8 +6,8 @@
         {% if messages %}
         {% for message in messages %}
 
-        <!-- Debug Message -->
         {% if message.tags == 'debug' %}
+        <!-- Debug Message -->
         <div class="alert alert-primary">
             <div class="container">
                 <div class="alert-icon">
@@ -20,8 +20,8 @@
             </div>
         </div>
 
-        <!-- Info Message -->
         {% elif message.tags == 'info' %}
+        <!-- Info Message -->
         <div class="alert alert-info">
             <div class="container">
                 <div class="alert-icon">
@@ -34,8 +34,8 @@
             </div>
         </div>
 
-        <!-- Success Message -->
         {% elif message.tags == 'success' %}
+        <!-- Success Message -->
         <div class="alert alert-success">
             <div class="container">
                 <div class="alert-icon">
@@ -48,8 +48,8 @@
             </div>
         </div>
 
-        <!-- Warning Message -->
         {% elif message.tags == 'warning' %}
+        <!-- Warning Message -->
         <div class="alert alert-warning">
             <div class="container">
                 <div class="alert-icon">
@@ -62,8 +62,8 @@
             </div>
         </div>
 
-        <!-- Error Message -->
         {% elif message.tags == 'error' %}
+        <!-- Error Message -->
         <div class="alert alert-danger">
             <div class="container">
                 <div class="alert-icon">
