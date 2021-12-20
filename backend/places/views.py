@@ -108,8 +108,6 @@ class SearchResultsView(ListView):
         search_vector = SearchVector('name', 'description')
         search_query = SearchQuery(query)
 
-        logger.info('Search query: %s' % query)
-
         return (
             Place.listed.annotate(
                 search=search_vector, rank=SearchRank(search_vector, search_query)
