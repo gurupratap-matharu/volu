@@ -55,6 +55,9 @@ class Place(models.Model):
 
     class Meta:
         ordering = ('-updated_on', )
+        permissions = [
+            ('special_status', 'Can see all places'),
+        ]
 
     def __str__(self):
         return ", ".join([self.name, self.country.name])
