@@ -11,7 +11,7 @@ from django_countries.fields import CountryField
 from taggit.managers import TaggableManager
 from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
 
-from .utils import place_image_path, place_thumbnail_path
+from .utils import cover_image_path, cover_thumbnail_path, place_image_path, place_thumbnail_path
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +46,9 @@ class Place(models.Model):
 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+
+    cover = models.ImageField(verbose_name=_('Cover photo'), upload_to=cover_image_path, blank=True)
+    thumbnail = models.ImageField(upload_to=cover_thumbnail_path, null=True)
 
     host = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='places')
 
