@@ -297,7 +297,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'support@voluhunt.xyz'
 DEFAULT_TO_EMAIL = 'support@voluhunt.xyz'
 RECIPIENT_LIST = ['gurupratap.matharu@gmail.com']
-
+ADMINS = [('VoluHunt Support', 'support@voluhunt.xyz'), ('Veer', 'veerplaying@gmail.com')]
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
