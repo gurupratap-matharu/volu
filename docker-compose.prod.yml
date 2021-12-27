@@ -8,6 +8,7 @@ services:
     volumes:
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - /var/log:/var/log
     ports:
       - "8000:8000"
     depends_on:
