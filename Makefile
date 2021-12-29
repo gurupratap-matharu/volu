@@ -69,7 +69,7 @@ lint: isort
 	flake8 $(APP_LIST)
 
 test: migrations-check
-	docker-compose exec web python manage.py test -v 2
+	docker-compose exec web python -Wa manage.py test -v 2
 
 ci: lint test
 	python manage.py coverage report
