@@ -1,11 +1,22 @@
-# gunicorn.conf.py
-# Non logging stuff
+# Gunicorn configuration file
+# https://docs.gunicorn.org/en/stable/configure.html#configuration-file
+# https://docs.gunicorn.org/en/stable/settings.html
+
+import multiprocessing
+
+# restart workers after so many requests with some variability
+max_requests = 1000
+max_requests_jitter = 50
+
+
 bind = "0.0.0.0:8000"
-workers = 3
+workers = multiprocessing.cpu_count() * 2 + 1
 # Access log - records incoming HTTP requests
-accesslog = "/var/log/gunicorn.access.log"
-# Error log - records Gunicorn server goings-on
-errorlog = "/var/log/gunicorn.error.log"
+accesslog = "/var/log/gunicorn_access.log"
+
+# Error log - records Gunicorn server errors
+errorlog = "/var/log/gunicorn_error.log"
+
 # Whether to send Django output to the error log
 capture_output = True
 # How verbose the Gunicorn error logs should be
