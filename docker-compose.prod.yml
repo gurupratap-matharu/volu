@@ -3,7 +3,7 @@ version: "3.8"
 services:
   web:
     image: "${WEB_IMAGE}"
-    command: gunicorn main.wsgi:application --workers 3 -b 0.0.0.0:8000 --log-level INFO --error-logfile /var/log/gunicorn_error.log --access-logfile /var/log/gunicorn_access.log
+    command: gunicorn main.wsgi:application --config main/gunicorn.conf.py 
     env_file: .env
     volumes:
       - static_volume:/code/staticfiles
