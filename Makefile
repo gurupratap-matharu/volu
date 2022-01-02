@@ -1,4 +1,4 @@
-APP_LIST ?= main pages users blog places 
+APP_LIST ?= blog main orders pages places subscriptions users 
 .PHONY: collectstatic run test ci install install-dev migrations staticfiles
 
 help:
@@ -73,5 +73,3 @@ test: migrations-check
 
 ci: lint test
 	python manage.py coverage report
-
-ci: test
