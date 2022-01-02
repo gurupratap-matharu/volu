@@ -294,7 +294,7 @@ STATICFILES_FINDERS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'support@voluhunt.xyz'
+DEFAULT_FROM_EMAIL = 'noreply@voluhunt.xyz'
 DEFAULT_TO_EMAIL = 'support@voluhunt.xyz'
 SERVER_EMAIL = 'django@voluhunt.xyz'
 
