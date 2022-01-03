@@ -31,6 +31,10 @@ class ContactForm(forms.Form):
         subject = self.cleaned_data['subject']
         message = 'From: {name}\nEmail: {email}\n\n{message}'.format(**self.cleaned_data)
 
+        logger.info('subject: %s', subject)
+        logger.info('message: %s', message)
+        logger.info('Sending contact email...')
+
         send_mail(subject=subject,
                   message=message,
                   from_email=self.cleaned_data['email'],
