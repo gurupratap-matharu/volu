@@ -14,7 +14,6 @@ from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
 
-import dj_database_url
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -43,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.postgres',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -138,7 +136,6 @@ TAGGIT_CASE_INSENSITIVE = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -301,8 +298,6 @@ SERVER_EMAIL = 'django@voluhunt.xyz'
 RECIPIENT_LIST = ['gurupratap.matharu@gmail.com']
 ADMINS = [('VoluHunt Support', 'support@voluhunt.xyz'), ('Veer', 'veerplaying@gmail.com')]
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 SHELL_PLUS_IMPORTS = [
     'from users.factories import UserFactory, ProfileFactory',
